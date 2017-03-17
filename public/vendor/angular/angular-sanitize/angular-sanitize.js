@@ -354,7 +354,7 @@ function htmlParser(html, handler) {
     }
 
     if (html == last) {
-      throw $sanitizeMinErr('badparse', "The sanitizer was unable to parse the following block " +
+      throw $sanitizeMinErr('badparse', "The sanitizer was unable to parse the following blocks " +
                                         "of html: {0}", html);
     }
     last = html;

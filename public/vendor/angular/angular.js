@@ -16205,7 +16205,7 @@ function urlIsSameOrigin(requestUrl) {
      <file name="protractor.js" type="protractor">
       it('should display the greeting in the input box', function() {
        element(by.model('greeting')).sendKeys('Hello, E2E Tests');
-       // If we click the button it will block the test runner
+       blocks
        // element(':button').click();
       });
      </file>

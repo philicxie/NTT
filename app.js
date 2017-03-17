@@ -25,6 +25,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 
+// main----------------------------------
+//var User = require('./routes/db').User;
+var Book = require('./routes/db').Book;
+
+
+Book.find(function(err, doc){
+  if(err) return console.error(err);
+  console.log(doc);
+});
+//!main----------------------------------
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
