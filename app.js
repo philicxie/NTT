@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var mainRemote = require('./routes/mainRemote');
+var signinRemote = require('./routes/signinRemote');
 
 var app = express();
 
@@ -27,6 +28,7 @@ app.use('/', index);
 app.use('/users', users);
 
 app.use('/main', mainRemote);
+app.use('/signin', signinRemote);
 
 // main----------------------------------
 //var User = require('./routes/db').User;

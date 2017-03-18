@@ -1,7 +1,42 @@
-<div class="wrapper-md">
-    <div ng-controller="MainPageCtrl">
-        <div ng-repeat="book in bookGroup">
 
+<div class="wrapper-md">
+    <div class="row" style="width: 1800px;">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div ng-controller="MainPageCtrl">
+                <div ng-repeat="book in bookGroup" style="min-height: 300px;">
+                    <div class="row clearfix">
+                        <div class="col-lg-2">
+                            <img src="img/books/{{category}}/{{book.url}}" style="height: 180px;">
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="panel panel-default">
+
+                                <div class="list-group no-radius alt">
+                                    <div class="list-group-item" href>
+                                        <h3><i class="fa fa-book"></i>&nbsp&nbsp{{book.name}}</h3>
+                                    </div>
+                                    <div class="list-group-item" href>
+                                        <h5><i class="icon-pencil"></i>&nbsp&nbsp{{book.author}}</h5>
+                                    </div>
+                                    <div class="list-group-item" href>
+                                        <h3>￥{{book.price}}</h3>
+                                    </div>
+                                </div>
+                                <div class="panel-footer">
+                                    <div class="clearfix">
+                                        <button class="btn m-b-xs btn-md btn-primary btn-addon" style="width: 150px;"><i class="fa fa-plus"></i>加入购物车</button>
+                                        <button class="btn m-b-xs btn-md btn-info btn-addon" style="width: 150px;"><i class="icon-wallet"></i>立即购买</button>
+                                    </div>
+                            </div>
+                            <!--<h4>{{book.name}}</h4>-->
+                            <!--<h4>{{book.author}}</h4>-->
+                            <!--<h4>{{book.price}}</h4>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+
     </div>
 </div>

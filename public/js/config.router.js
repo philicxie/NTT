@@ -35,6 +35,17 @@ angular.module('app')
                       ]
                   }
               })
+              .state('app.cart', {
+                  url: '/cart',
+                  templateUrl: 'pages/cart.html',
+                  resolve: {
+                      deps: ['ocLazyLoad',
+                          function($ocLazyLoad){
+                              return $ocLazyLoad.load(['js/res/cart.js']);
+                          }
+                      ]
+                  }
+              })
               .state('signin', {
                   url: '/signin',
                   templateUrl: 'pages/signin.html',
