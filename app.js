@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var mainRemote = require('./routes/mainRemote');
 
 var app = express();
 
@@ -25,15 +26,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 
+app.use('/main', mainRemote);
+
 // main----------------------------------
 //var User = require('./routes/db').User;
-var Book = require('./routes/db').Book;
-
-
-Book.find(function(err, doc){
-  if(err) return console.error(err);
-  console.log(doc);
-});
+// var Book = require('./routes/db').Book;
+//
+//
+// Book.find(function(err, doc){
+//   if(err) return console.error(err);
+//   console.log(doc);
+// });
 //!main----------------------------------
 
 // catch 404 and forward to error handler
