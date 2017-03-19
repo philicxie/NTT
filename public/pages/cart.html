@@ -1,29 +1,45 @@
-
+<div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">购物车</h1>
+</div>
 <div class="wrapper-md">
     <div class="row" style="width: 1800px;">
-        <div class="col-md-2"></div>
+        <div class="col-md-1"></div>
         <div class="col-md-8">
             <div ng-controller="CartCtrl">
-                <div ng-repeat="book in bookCart" style="min-height: 300px;">
-                    <div class="row clearfix">
-                        <div class="col-lg-2">
+                <div ng-repeat="book in bookCart" style="min-height: 250px;">
+                    <div class="row clearfix" style="background-color: #FFFFFF;">
+                        <div class="col-lg-1">
+                            <div class="checkbox" style="margin-top: 100px;">
+                                <label class="i-checks i-checks-lg">
+                                    <input type="checkbox">
+                                    <i></i>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-2" style="margin-top: 15px;">
                             <img src="img/books/{{book.category}}/{{book.url}}" style="height: 180px;">
                         </div>
-                        <div class="col-lg-7">
+                        <div class="col-lg-6" style="margin-top: 15px;">
                             <div class="panel panel-default">
-
-                                <div class="list-group no-radius alt">
-                                    <div class="list-group-item" href>
+                                <ul class="list-group no-radius">
+                                    <li class="list-group-item">
                                         <h3><i class="fa fa-book"></i>&nbsp&nbsp{{book.name}}</h3>
-                                    </div>
-                                    <div class="list-group-item" href>
+                                    </li>
+                                    <li class="list-group-item">
                                         <h5><i class="icon-pencil"></i>&nbsp&nbsp{{book.author}}</h5>
-                                    </div>
-                                    <div class="list-group-item" href>
-                                        <h3>￥{{book.price}}</h3>
-                                    </div>
-                                </div>
+                                    </li>
+                                    <li class="list-group-item">
+
+                                        <span class="pull-right" style="width: 120px;">
+                                            <input ui-jq="TouchSpin" type="text" value="1" class="form-control" data-min='0' data-max="10" data-step="1" data-decimals="0" >
+                                        </span>
+                                        <h4>￥{{book.price}}</h4>
+                                    </li>
+                                </ul>
                             </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <button class="btn m-b-xs btn-lg btn-danger btn-addon" style="margin-top: 100px; margin-left: 50px;"><i class="fa fa-trash-o"></i>删除</button>
                         </div>
                     </div>
                 </div>
