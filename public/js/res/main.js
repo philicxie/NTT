@@ -3,7 +3,7 @@
  */
 'user strict';
 
-app.controller('MainPageCtrl', ['$scope', '$http', '$localStorage', function($scope, $http, $localStorage) {
+app.controller('MainPageCtrl', ['$state', '$scope', '$http', '$localStorage', function($state, $scope, $http, $localStorage) {
     if($localStorage.cart===undefined) {
         $localStorage.cart = new Array();
     }
@@ -31,7 +31,6 @@ app.controller('MainPageCtrl', ['$scope', '$http', '$localStorage', function($sc
         for(var i=0;i<$localStorage.cart.length;i++) {
             if($localStorage.cart[i].book._id===temBook._id) {
                 $localStorage.cart[i].count = $localStorage.cart[i].count*1+1;
-                console.log($localStorage.cart);
                 return;
             }
         }
@@ -39,10 +38,21 @@ app.controller('MainPageCtrl', ['$scope', '$http', '$localStorage', function($sc
             index: $localStorage.cart.length,
             book: temBook,
             count: 1,
-            paid: true
+            paying: false
         };
         $localStorage.cart.push(newBook);
-        console.log($localStorage.cart);
     }
-    
+    $scope.buyBook = function(temBook) {
+        temBook = JSON.parse(temBook);
+        var newBook = {
+            index: 0,
+            book: temBook,
+            count: 1,
+            paying: true
+        };
+        $localStorage.bookBill = {};
+        $localStorage.bookBill.books = [];
+        $localStorage.bookBill.books.push(newBook);
+        $state.go('app.pay');
+    }
 }]);

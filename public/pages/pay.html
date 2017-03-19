@@ -11,7 +11,7 @@
                         <span class="font-normal h2">订单</span>
                     </div>
                     <div class="panel-body">
-                        <div ng-repeat="book in bookCart" style="min-height: 250px;">
+                        <div ng-repeat="book in bookBill" style="min-height: 250px;">
                             <div class="row clearfix" style="background-color: #FFFFFF;">
                                 <div class="col-lg-1">
                                 </div>
@@ -42,7 +42,7 @@
                     <footer class="panel-footer text-right bg-light lter">
                         <div class="row">
                             <div class="col-lg-8">
-                                <button type="submit" class="btn btn-lg" ng-disabled="true" style="width:150px; border:1px solid; border-color: red; background-color: #FFFFFF";>合计: ￥{{bookBill.price}}</button>
+                                <button type="submit" class="btn btn-lg" ng-disabled="true" style="width:150px; border:1px solid; border-color: red; background-color: #FFFFFF";>合计: ￥{{billPrice}}</button>
                             </div>
                             <div class="col-lg-2">
                                 <button type="submit" class="btn btn-danger btn-lg" style="width:150px;">提交订单</button>
