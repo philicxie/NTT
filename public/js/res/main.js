@@ -7,6 +7,7 @@ app.controller('MainPageCtrl', ['$scope', '$http', '$localStorage', function($sc
     if($localStorage.cart===undefined) {
         $localStorage.cart = new Array();
     }
+    //$localStorage.cart = new Array();
     console.log('haha');
     $scope.category = 'sh';
     $http({
@@ -25,9 +26,21 @@ app.controller('MainPageCtrl', ['$scope', '$http', '$localStorage', function($sc
     
     $scope.oneAtATime = true;
     
-    $scope.addCart = function(bookId) {
-        console.log(bookId);
-        $localStorage.cart.push(bookId);
+    $scope.addCart = function(temBook) {
+        temBook = JSON.parse(temBook);
+        for(var i=0;i<$localStorage.cart.length;i++) {
+            if($localStorage.cart[i].book._id===temBook._id) {
+                $localStorage.cart[i].count = $localStorage.cart[i].count*1+1;
+                console.log($localStorage.cart);
+                return;
+            }
+        }
+        var newBook = {
+            index: $localStorage.cart.length,
+            book: temBook,
+            count: 1
+        };
+        $localStorage.cart.push(newBook);
         console.log($localStorage.cart);
     }
     
