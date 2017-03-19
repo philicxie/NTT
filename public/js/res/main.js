@@ -2,9 +2,11 @@
  * Created by philic on 2017/3/18.
  */
 'user strict';
-console.log('this is main');
 
-app.controller('MainPageCtrl', ['$scope', '$http', function($scope, $http) {
+app.controller('MainPageCtrl', ['$scope', '$http', '$localStorage', function($scope, $http, $localStorage) {
+    if($localStorage.cart===undefined) {
+        $localStorage.cart = new Array();
+    }
     console.log('haha');
     $scope.category = 'sh';
     $http({
@@ -22,8 +24,11 @@ app.controller('MainPageCtrl', ['$scope', '$http', function($scope, $http) {
     });
     
     $scope.oneAtATime = true;
-    // $scope.bookGroup = {
-    //    
-    // };
+    
+    $scope.addCart = function(bookId) {
+        console.log(bookId);
+        $localStorage.cart.push(bookId);
+        console.log($localStorage.cart);
+    }
     
 }]);

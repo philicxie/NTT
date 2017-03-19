@@ -39,7 +39,7 @@ angular.module('app')
                   url: '/cart',
                   templateUrl: 'pages/cart.html',
                   resolve: {
-                      deps: ['ocLazyLoad',
+                      deps: ['$ocLazyLoad',
                           function($ocLazyLoad){
                               return $ocLazyLoad.load(['js/res/cart.js']);
                           }
