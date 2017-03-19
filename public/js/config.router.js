@@ -29,9 +29,9 @@ angular.module('app')
                   templateUrl: 'pages/main.html',
                   resolve: {
                       deps: ['$ocLazyLoad',
-                        function($ocLazyLoad){
-                            return $ocLazyLoad.load(['js/res/main.js']);
-                        }
+                          function($ocLazyLoad){
+                              return $ocLazyLoad.load(['js/res/main.js']);
+                          }
                       ]
                   }
               })
@@ -357,7 +357,7 @@ angular.module('app')
               })
               .state('access.signin', {
                   url: '/signin',
-                  templateUrl: 'tpl/signin.html',
+                  templateUrl: 'tpl/page_signin.html',
                   resolve: {
                       deps: ['uiLoad',
                         function( uiLoad ){
