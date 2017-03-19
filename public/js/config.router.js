@@ -68,6 +68,17 @@ angular.module('app')
                       ]
                   }
               })
+              .state('app.authority', {
+                  url: '/authority',
+                  templateUrl: 'pages/authority.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                          function($ocLazyLoad){
+                              return $ocLazyLoad.load(['js/res/authority.js']);
+                          }
+                      ]
+                  }
+              })
               .state('app.dashboard-v1', {
                   url: '/dashboard-v1',
                   templateUrl: 'tpl/app_dashboard_v1.html',

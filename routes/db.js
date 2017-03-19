@@ -17,9 +17,23 @@ var userSchema = mongoose.Schema({
     name: String,
     account: String,
     password: String,
-    phone: String
+    phone: String,
+    address: String,
+    code: Number
+});
+
+var orderSchema = mongoose.Schema({
+    index: Number,
+    key: String,
+    user: String,
+    books: [String],
+    time: Date,
+    status: Number
 })
+
 
 module.exports.Book = mongoose.model('Books', bookSchema);
 
 module.exports.User = mongoose.model('Users', userSchema);
+
+module.exports.Order = mongoose.model('Orders', orderSchema);

@@ -1,15 +1,7 @@
 <div class="modal-header">
-    <h3 class="modal-title">Modal!</h3>
+    <h3 class="modal-title">添加成功</h3>
 </div>
-<div class="modal-body">
-    <ul>
-        <li ng-repeat="item in items">
-            <a ng-click="selected.item = item">{{ item }}</a>
-        </li>
-    </ul>
-    Selected: <b>{{ selected.item }}</b>
-</div>
-<div class="modal-footer">                  
-    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
-    <button class="btn btn-primary" ng-click="ok()">OK</button>
+<div class="modal-footer" ng-controller="MainPageCtrl">
+    <button class="btn btn-default" ng-click="cancel()">继续购物</button>
+    <button class="btn btn-primary" ng-click="urefCart()">转到购物车</button>
 </div>

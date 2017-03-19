@@ -24,15 +24,21 @@
           </li>
           <li class="dropdown" dropdown>
             <a href class="dropdown-toggle clear" dropdown-toggle>
-              <span class="hidden-sm hidden-md">{{ user.name ? user.name : '游客' }}</span> <b class="caret"></b>
+              <span class="hidden-sm hidden-md">Admin</span> <b class="caret"></b>
             </a>
             <ul class="dropdown-menu animated fadeInRight w">
-              <li ng-show=user.name>
+              <li ng-show=false>
+                <a ui-sref="app.cart">个人资料</a>
+              </li>
+              <li ng-show=false>
                 <a ui-sref="app.cart">购物车</a>
+              </li>
+              <li ng-show=false>
+                <a ui-sref="app.cart">我的订单</a>
               </li>
               <li class="divider"></li>
               <li>
-                <a ui-sref="signin">{{ user.name ? '退出' : '登录' }}</a>
+                <a ui-sref="signin">登录</a>
               </li>
             </ul>
           </li>

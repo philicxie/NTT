@@ -5,7 +5,7 @@
 
 /* Controllers */
 // signin controller
-app.controller('SigninFormController', ['$scope', '$http', '$state', function($scope, $http, $state) {
+app.controller('SigninFormController', ['$localStorage', '$scope', '$http', '$state', function($localStorage, $scope, $http, $state) {
     $scope.user = {};
     $scope.authError = null;
     $scope.login = function() {
@@ -20,19 +20,18 @@ app.controller('SigninFormController', ['$scope', '$http', '$state', function($s
             }
         }).then(function success(res){
             console.log(res);
+            res = res.data;
+            if(res.code===101) {
+                $localStorage.user = {};
+                $localStorage.user.name = res.name;
+                $state.go('app.main');
+            }
+            if(res.code===200) {
+                $scope.authError = 'Email or Password not right';
+            }
         }, function error(err){
             console.log(err);
         });
-        // $http.post('api/login', {email: $scope.user.email, password: $scope.user.password})
-        //     .then(function(response) {
-        //         if ( !response.data.user ) {
-        //             $scope.authError = 'Email or Password not right';
-        //         }else{
-        //             $state.go('app.dashboard-v1');
-        //         }
-        //     }, function(x) {
-        //         $scope.authError = 'Server Error';
-        //     });
     };
 }])
 ;

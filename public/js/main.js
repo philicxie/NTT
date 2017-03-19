@@ -9,7 +9,10 @@ angular.module('app')
       var isIE = !!navigator.userAgent.match(/MSIE/i);
       isIE && angular.element($window.document.body).addClass('ie');
       isSmartDevice( $window ) && angular.element($window.document.body).addClass('smart');
-
+      if($localStorage.user!==undefined) {
+        $scope.user = {};
+        $scope.user.name = $localStorage.user.name;
+      }
       // config
       $scope.app = {
         name: 'Angulr',

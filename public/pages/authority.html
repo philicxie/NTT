@@ -1,0 +1,40 @@
+<div class="hbox hbox-auto-xs hbox-auto-sm">
+    <!-- main header -->
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-sm-12 col-xs-12">
+                <h1 class="m-n font-thin h3 text-black">权限管理</h1>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper-md">
+        <button class="btn m-b-xs btn-md btn-primary btn-addon" style="width: 120px;"><i class="fa fa-plus"></i>新增用户</button>
+        <button class="btn m-b-xs btn-md btn-info btn-addon" style="width: 120px;"><i class="fa fa-refresh "></i>刷新</button>
+        <div class="panel panel-default">
+            <div class="table-responsive">
+                <table ui-jq="dataTable" ui-options="{
+                    sAjaxSource: 'data/users.json',
+                      aoColumns: [
+                        { mData: 'account' },
+                        { mData: 'name' },
+                        { mData: 'au_admin' },
+                        { mData: 'au_manager' }
+                      ]
+                    }" class="table table-striped m-b-none" style="min-height: 400px;">
+                    <thead>
+                    <tr>
+                        <th  style="width:20%">账号</th>
+                        <th  style="width:20%">姓名</th>
+                        <th  style="width:20%">管理员权限</th>
+                        <th  style="width:20%">负责人权限</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+</div>

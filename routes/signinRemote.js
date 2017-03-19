@@ -15,6 +15,11 @@ router.post('/checkUser', function(req, res, next) {
     User.find(query, function(err, doc){
         if(err) return console.error(err);
         console.log(doc);
+        if(doc.length===1) {
+            res.send({code: 101, user: doc[0].name});
+        } else {
+            res.send({code: 200});
+        }
         //res.send(doc);
     });
 });
