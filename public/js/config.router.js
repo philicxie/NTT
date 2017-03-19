@@ -46,6 +46,17 @@ angular.module('app')
                       ]
                   }
               })
+              .state('app.pay', {
+                  url: '/pay',
+                  templateUrl: 'pages/pay.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                          function($ocLazyLoad){
+                              return $ocLazyLoad.load(['js/res/pay.js']);
+                          }
+                      ]
+                  }
+              })
               .state('signin', {
                   url: '/signin',
                   templateUrl: 'pages/signin.html',
