@@ -1,4 +1,33 @@
 
-<div class="wrapper-md" ng-controller="CartCtrl">
+<div class="wrapper-md">
+    <div class="row" style="width: 1800px;">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div ng-controller="CartCtrl">
+                <div ng-repeat="book in bookCart" style="min-height: 300px;">
+                    <div class="row clearfix">
+                        <div class="col-lg-2">
+                            <img src="img/books/{{book.category}}/{{book.url}}" style="height: 180px;">
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="panel panel-default">
 
-</div>
+                                <div class="list-group no-radius alt">
+                                    <div class="list-group-item" href>
+                                        <h3><i class="fa fa-book"></i>&nbsp&nbsp{{book.name}}</h3>
+                                    </div>
+                                    <div class="list-group-item" href>
+                                        <h5><i class="icon-pencil"></i>&nbsp&nbsp{{book.author}}</h5>
+                                    </div>
+                                    <div class="list-group-item" href>
+                                        <h3>￥{{book.price}}</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
