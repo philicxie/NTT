@@ -2,9 +2,9 @@
     <h1 class="m-n font-thin h3">购物车</h1>
 </div>
 <div class="wrapper-md">
-    <div class="row" style="width: 1800px;">
+    <div class="row">
         <div class="col-md-1"></div>
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div ng-controller="CartCtrl">
                 <div ng-repeat="book in bookCart" style="min-height: 250px;">
                     <div class="row clearfix" style="background-color: #FFFFFF;">
@@ -16,7 +16,7 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="col-lg-2" style="margin-top: 15px;">
+                        <div class="col-lg-3" style="margin-top: 15px;">
                             <img src="img/books/{{book.category}}/{{book.url}}" style="height: 180px;">
                         </div>
                         <div class="col-lg-6" style="margin-top: 15px;">
@@ -38,8 +38,8 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-lg-3">
-                            <button class="btn m-b-xs btn-lg btn-danger btn-addon" style="margin-top: 100px; margin-left: 50px;"><i class="fa fa-trash-o"></i>删除</button>
+                        <div class="col-lg-2">
+                            <button class="btn m-b-xs btn-md btn-danger btn-addon" style="margin-top: 100px;"><i class="fa fa-trash-o"></i>删除</button>
                         </div>
                     </div>
                 </div>
