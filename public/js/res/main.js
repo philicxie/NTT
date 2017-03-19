@@ -38,7 +38,8 @@ app.controller('MainPageCtrl', ['$scope', '$http', '$localStorage', function($sc
         var newBook = {
             index: $localStorage.cart.length,
             book: temBook,
-            count: 1
+            count: 1,
+            paid: true
         };
         $localStorage.cart.push(newBook);
         console.log($localStorage.cart);

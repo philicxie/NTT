@@ -6,44 +6,50 @@
         <div class="col-md-1"></div>
         <div class="col-md-9">
             <div ng-controller="PayCtrl">
-                <div ng-repeat="book in bookCart" style="min-height: 250px;">
-                    <div class="row clearfix" style="background-color: #FFFFFF;">
-                        <div class="col-lg-1">
-                            <div class="checkbox" style="margin-top: 100px;">
-                                <label class="i-checks i-checks-lg">
-                                    <input type="checkbox">
-                                    <i></i>
-                                </label>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <span class="font-normal h2">订单</span>
+                    </div>
+                    <div class="panel-body">
+                        <div ng-repeat="book in bookCart" style="min-height: 250px;">
+                            <div class="row clearfix" style="background-color: #FFFFFF;">
+                                <div class="col-lg-1">
+                                </div>
+                                <div class="col-lg-3" style="margin-top: 15px;">
+                                    <img src="img/books/{{book.book.category}}/{{book.book.url}}" style="height: 180px;">
+                                </div>
+                                <div class="col-lg-6" style="margin-top: 15px;">
+                                    <div class="panel panel-default">
+                                        <ul class="list-group no-radius">
+                                            <li class="list-group-item">
+                                                <h3><i class="fa fa-book"></i>&nbsp&nbsp{{book.book.name}}</h3>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <h5><i class="icon-pencil"></i>&nbsp&nbsp{{book.book.author}}</h5>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <span class="pull-right" style="width: 120px;">
+                                                    <h4>× {{book.count}}</h4>
+                                                </span>
+                                                <h4>￥{{book.book.price}}</h4>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3" style="margin-top: 15px;">
-                            <img src="img/books/{{book.book.category}}/{{book.book.url}}" style="height: 180px;">
-                        </div>
-                        <div class="col-lg-6" style="margin-top: 15px;">
-                            <div class="panel panel-default">
-                                <ul class="list-group no-radius">
-                                    <li class="list-group-item">
-                                        <h3><i class="fa fa-book"></i>&nbsp&nbsp{{book.book.name}}</h3>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <h5><i class="icon-pencil"></i>&nbsp&nbsp{{book.book.author}}</h5>
-                                    </li>
-                                    <li class="list-group-item">
-
-                                        <span class="pull-right" style="width: 120px;">
-                                            <input ui-jq="TouchSpin" type="text" value="{{book.count}}" class="form-control" data-min='0' data-max="10" data-step="1" data-decimals="0" >
-                                        </span>
-                                        <h4>￥{{book.book.price}}</h4>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-2">
-                            <button class="btn m-b-xs btn-md btn-danger btn-addon" style="margin-top: 100px;" ng-click="rmBook('{{book.index}')"><i class="fa fa-trash-o"></i>删除</button>
                         </div>
                     </div>
+                    <footer class="panel-footer text-right bg-light lter">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <button type="submit" class="btn btn-lg" ng-disabled="true" style="width:150px; border:1px solid; border-color: red; background-color: #FFFFFF";>合计: ￥{{bookBill.price}}</button>
+                            </div>
+                            <div class="col-lg-2">
+                                <button type="submit" class="btn btn-danger btn-lg" style="width:150px;">提交订单</button>
+                            </div>
+                        </div>
+                    </footer>
                 </div>
             </div>
-
         </div>
     </div>
