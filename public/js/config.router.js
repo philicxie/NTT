@@ -26,6 +26,9 @@ angular.module('app')
               })
               .state('app.main', {
                   url: '/main',
+                  params: {
+                      category: null
+                  },
                   templateUrl: 'pages/main.html',
                   resolve: {
                       deps: ['$ocLazyLoad',

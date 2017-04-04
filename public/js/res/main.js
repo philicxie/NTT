@@ -3,7 +3,7 @@
  */
 'user strict';
 
-app.controller('MainPageCtrl', ['$modal', '$state', '$scope', '$http', '$localStorage', function($modal, $state, $scope, $http, $localStorage) {
+app.controller('MainPageCtrl', ['$modal', '$state', '$scope', '$http', '$localStorage', '$stateParams', function($modal, $state, $scope, $http, $localStorage, $stateParams) {
     if($localStorage.cart===undefined) {
         $localStorage.cart = new Array();
     }
@@ -13,7 +13,7 @@ app.controller('MainPageCtrl', ['$modal', '$state', '$scope', '$http', '$localSt
         $scope.user.name = $localStorage.user.name;
     }
     console.log('haha');
-    $scope.category = 'sh';
+    $scope.category = $stateParams.category;
     $scope.items = ['item1', 'item2', 'item3'];
     $http({
         method:'POST',
