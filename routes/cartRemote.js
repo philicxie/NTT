@@ -1,7 +1,7 @@
 /**
  * Created by philic on 2017/3/18.
  */
-var Book = require('../routes/db').Book;
+var Book = require('../routes/db').book;
 var express = require('express');
 var router = express.Router();
 

@@ -19,7 +19,7 @@ var userSchema = mongoose.Schema({
     password: String,
     phone: String,
     address: String,
-    code: Number
+    auth_code: Number
 });
 
 var orderSchema = mongoose.Schema({
@@ -29,11 +29,11 @@ var orderSchema = mongoose.Schema({
     books: [String],
     time: Date,
     status: Number
-})
+});
 
 
-module.exports.Book = mongoose.model('Books', bookSchema);
+module.exports.book = mongoose.model('Books', bookSchema);
 
-module.exports.User = mongoose.model('Users', userSchema);
+module.exports.user = mongoose.model('Users', userSchema);
 
-module.exports.Order = mongoose.model('Orders', orderSchema);
+module.exports.order = mongoose.model('Orders', orderSchema);

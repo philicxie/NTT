@@ -376,7 +376,7 @@ angular.module('ngResource', ['ng']).
         isFunction = angular.isFunction;
 
       /**
-       * We need our custom method because encodeURIComponent is too aggressive and doesn't follow
+       * We need our custom.css method because encodeURIComponent is too aggressive and doesn't follow
        * http://www.ietf.org/rfc/rfc3986.txt with regards to the character set
        * (pchar) allowed in path segments:
        *    segment       = *pchar
@@ -396,7 +396,7 @@ angular.module('ngResource', ['ng']).
 
       /**
        * This method is intended for encoding *key* or *value* parts of query component. We need a
-       * custom method because encodeURIComponent is too aggressive and encodes stuff that doesn't
+       * custom.css method because encodeURIComponent is too aggressive and encodes stuff that doesn't
        * have to be encoded per http://tools.ietf.org/html/rfc3986:
        *    query       = *( pchar / "/" / "?" )
        *    pchar         = unreserved / pct-encoded / sub-delims / ":" / "@"

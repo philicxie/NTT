@@ -1158,7 +1158,7 @@ function toKeyValue(obj) {
 
 
 /**
- * We need our custom method because encodeURIComponent is too aggressive and doesn't follow
+ * We need our custom.css method because encodeURIComponent is too aggressive and doesn't follow
  * http://www.ietf.org/rfc/rfc3986.txt with regards to the character set (pchar) allowed in path
  * segments:
  *    segment       = *pchar
@@ -1177,7 +1177,7 @@ function encodeUriSegment(val) {
 
 
 /**
- * This method is intended for encoding *key* or *value* parts of query component. We need a custom
+ * This method is intended for encoding *key* or *value* parts of query component. We need a custom.css
  * method because encodeURIComponent is too aggressive and encodes stuff that doesn't have to be
  * encoded per http://tools.ietf.org/html/rfc3986:
  *    query       = *( pchar / "/" / "?" )
@@ -3189,7 +3189,7 @@ forEach({
         target: element
       };
 
-      // If a custom event was provided then extend our dummy event with it
+      // If a custom.css event was provided then extend our dummy event with it
       if (event.type) {
         dummyEvent = extend(dummyEvent, event);
       }
@@ -20601,7 +20601,7 @@ var NgModelController = ['$scope', '$exceptionHandler', '$attrs', '$element', '$
    * and the `default` trigger is not listed, all those actions will remain pending until one of the
    * `updateOn` events is triggered on the DOM element.
    * All these actions will be debounced if the {@link ng.directive:ngModelOptions ngModelOptions}
-   * directive is used with a custom debounce for this particular event.
+   * directive is used with a custom.css debounce for this particular event.
    *
    * Note that calling this function does not trigger a `$digest`.
    *
@@ -22614,7 +22614,7 @@ var ngControllerDirective = [function() {
    </example>
  */
 /*
- * A collection of directives that allows creation of custom event handlers that are defined as
+ * A collection of directives that allows creation of custom.css event handlers that are defined as
  * angular expressions and are compiled and executed within the current scope.
  */
 var ngEventDirectives = {};

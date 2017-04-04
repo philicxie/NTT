@@ -1055,7 +1055,7 @@ angular.module('ngAnimate', ['ng'])
          * @name $animate#addClass
          *
          * @description
-         * Triggers a custom animation event based off the className variable and then attaches the className value to the element as a CSS class.
+         * Triggers a custom.css animation event based off the className variable and then attaches the className value to the element as a CSS class.
          * Unlike the other animation methods, the animate service will suffix the className value with {@type -add} in order to provide
          * the animate service the setup and active CSS classes in order to trigger the animation (this will be skipped if no CSS transitions
          * or keyframes are defined on the -add-active or base CSS class).
@@ -1089,7 +1089,7 @@ angular.module('ngAnimate', ['ng'])
          * @name $animate#removeClass
          *
          * @description
-         * Triggers a custom animation event based off the className variable and then removes the CSS class provided by the className value
+         * Triggers a custom.css animation event based off the className variable and then removes the CSS class provided by the className value
          * from the element. Unlike the other animation methods, the animate service will suffix the className value with {@type -remove} in
          * order to provide the animate service the setup and active CSS classes in order to trigger the animation (this will be skipped if
          * no CSS transitions or keyframes are defined on the -remove or base CSS classes).

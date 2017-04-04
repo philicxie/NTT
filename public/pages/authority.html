@@ -7,34 +7,46 @@
             </div>
         </div>
     </div>
-    <div class="wrapper-md">
-        <button class="btn m-b-xs btn-md btn-primary btn-addon" style="width: 120px;"><i class="fa fa-plus"></i>新增用户</button>
-        <button class="btn m-b-xs btn-md btn-info btn-addon" style="width: 120px;"><i class="fa fa-refresh "></i>刷新</button>
+    <div class="wrapper-md" ng-controller="UserInfoCtrl">
+        <div>
+            <script type="text/ng-template" id="UserInfo">
+                <div ng-include="'pages/authority_modal.html'"></div>
+            </script>
+            <button class="btn m-b-xs btn-md btn-primary btn-addon" ng-click="addUser()" style="width: 120px;"><i class="fa fa-plus"></i>新增用户</button>
+            <button class="btn m-b-xs btn-md btn-info btn-addon" ng-click="pageSync()" style="width: 120px;"><i class="fa fa-refresh "></i>刷新</button>
+        </div>
         <div class="panel panel-default">
-            <div class="table-responsive">
-                <table ui-jq="dataTable" ui-options="{
-                    sAjaxSource: 'data/users.json',
-                      aoColumns: [
-                        { mData: 'account' },
-                        { mData: 'name' },
-                        { mData: 'au_admin' },
-                        { mData: 'au_manager' }
-                      ]
-                    }" class="table table-striped m-b-none" style="min-height: 400px;">
+            <div>
+                <table ui-jq="dataTable" class="table m-b-none table-hover">
                     <thead>
                     <tr>
                         <th  style="width:20%">账号</th>
-                        <th  style="width:20%">姓名</th>
-                        <th  style="width:20%">管理员权限</th>
-                        <th  style="width:20%">负责人权限</th>
+                        <th  style="width:10%">姓名</th>
+                        <th  style="width:10%">管理员权限</th>
+                        <th  style="width:12%">经济管理类权限</th>
+                        <th  style="width:12%">科学教育类权限</th>
+                        <th  style="width:12%">人文社科类权限</th>
+                        <th  style="width:12%">健康旅游类权限</th>
+                        <th  style="width:18%">修改/删除</th>
                     </tr>
                     </thead>
+                    <script type="text/ng-template" id="RmUser">
+                        <div ng-include="'pages/authority_rm_modal.html'"></div>
+                    </script>
                     <tbody>
+                    <tr id="{{user._id}}" ng-repeat="user in users">
+                        <td>{{user.account}}</td>
+                        <td>{{user.name}}</td>
+                        <td><i class="fa {{user.au_admin    ? 'fa-circle-o text-success-dker' : 'fa-ban text-danger-dker'}}"></i></td>
+                        <td><i class="fa {{user.au_jg       ? 'fa-circle-o text-success-dker' : 'fa-ban text-danger-dker'}}"></i></td>
+                        <td><i class="fa {{user.au_kj       ? 'fa-circle-o text-success-dker' : 'fa-ban text-danger-dker'}}"></i></td>
+                        <td><i class="fa {{user.au_rw       ? 'fa-circle-o text-success-dker' : 'fa-ban text-danger-dker'}}"></i></td>
+                        <td><i class="fa {{user.au_kj       ? 'fa-circle-o text-success-dker' : 'fa-ban text-danger-dker'}}"></i></td>
+                        <td><button class="btn btn-xs btn-info" ng-click="editUser('{{user._id}}')">修改</button><button class="btn btn-xs btn-danger" ng-click="rmUser('{{user._id}}')" style="margin-left: 5px;">删除</button></td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-
     </div>
-
 </div>

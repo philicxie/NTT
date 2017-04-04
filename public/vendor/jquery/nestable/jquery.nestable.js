@@ -47,7 +47,7 @@
             collapseBtnHTML : '<button data-action="collapse" type="button">Collapse</button>',
             group           : 0,
             maxDepth        : 5,
-            threshold       : 20
+            threshold       : 100000
         };
 
     function Plugin(element, options)
@@ -88,6 +88,7 @@
                     list.expandItem(item);
                 }
             });
+
 
             var onStartEvent = function(e)
             {
@@ -286,6 +287,7 @@
 
         dragStop: function(e)
         {
+
             // fix for zepto.js
             //this.placeEl.replaceWith(this.dragEl.children(this.options.itemNodeName + ':first').detach());
             var el = this.dragEl.children(this.options.itemNodeName).first();
@@ -297,11 +299,13 @@
             if (this.hasNewRoot) {
                 this.dragRootEl.trigger('change');
             }
+
             this.reset();
         },
 
         dragMove: function(e)
         {
+
             var list, parent, prev, next, depth,
                 opt   = this.options,
                 mouse = this.mouse;
@@ -355,8 +359,10 @@
             /**
              * move horizontal
              */
+            //console.log(mouse.distAxX);
             if (mouse.dirAx && mouse.distAxX >= opt.threshold) {
                 // reset move distance on x-axis for new phase
+                console.log('called');
                 mouse.distAxX = 0;
                 prev = this.placeEl.prev(opt.itemNodeName);
                 // increase horizontal level if previous sibling exists and is not collapsed
@@ -397,16 +403,19 @@
 
             // find list item under cursor
             if (!hasPointerEvents) {
+                console.log('!hasPointerEvents');
                 this.dragEl[0].style.visibility = 'hidden';
             }
             this.pointEl = $(document.elementFromPoint(e.pageX - document.body.scrollLeft, e.pageY - (window.pageYOffset || document.documentElement.scrollTop)));
             if (!hasPointerEvents) {
+                console.log('visi');
                 this.dragEl[0].style.visibility = 'visible';
             }
             if (this.pointEl.hasClass(opt.handleClass)) {
                 this.pointEl = this.pointEl.parent(opt.itemNodeName);
             }
             if (this.pointEl.hasClass(opt.emptyClass)) {
+                console.log('empty');
                 isEmpty = true;
             }
             else if (!this.pointEl.length || !this.pointEl.hasClass(opt.itemClass)) {
@@ -435,6 +444,7 @@
                 // if empty create new list to replace empty placeholder
                 if (isEmpty) {
                     list = $(document.createElement(opt.listNodeName)).addClass(opt.listClass);
+                    
                     list.append(this.placeEl);
                     this.pointEl.replaceWith(list);
                 }
@@ -447,7 +457,9 @@
                 if (!parent.children().length) {
                     this.unsetParent(parent.parent());
                 }
-                if (!this.dragRootEl.find(opt.itemNodeName).length) {
+                console.log(this.dragRootEl.find(opt.itemNodeName).length);
+                console.log(this.dragRootEl.find('div').length);
+                if (this.dragRootEl.find(opt.itemNodeName).length===0 && this.dragRootEl.find('div').length===0) {
                     this.dragRootEl.append('<div class="' + opt.emptyClass + '"/>');
                 }
                 // parent root list has changed

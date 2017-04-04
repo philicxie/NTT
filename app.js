@@ -10,6 +10,7 @@ var users = require('./routes/users');
 var mainRemote = require('./routes/mainRemote');
 var signinRemote = require('./routes/signinRemote');
 var cartRemote = require('./routes/cartRemote');
+var authorityRemote = require('./routes/authorityRemote');
 
 var app = express();
 
@@ -31,6 +32,7 @@ app.use('/users', users);
 app.use('/main', mainRemote);
 app.use('/signin', signinRemote);
 app.use('/cart', cartRemote);
+app.use('/authority', authorityRemote);
 
 // main----------------------------------
 //var User = require('./routes/db').User;

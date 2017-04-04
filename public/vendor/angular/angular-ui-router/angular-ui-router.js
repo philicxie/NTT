@@ -1090,7 +1090,7 @@ Type.prototype.is = function(val, key) {
  * @methodOf ui.router.util.type:Type
  *
  * @description
- * Encodes a custom/native type value to a string that can be embedded in a URL. Note that the
+ * Encodes a custom.css/native type value to a string that can be embedded in a URL. Note that the
  * return value does *not* need to be URL-safe (i.e. passed through `encodeURIComponent()`), it
  * only needs to be a representation of `val` that has been coerced to a string.
  *
@@ -1109,12 +1109,12 @@ Type.prototype.encode = function(val, key) {
  * @methodOf ui.router.util.type:Type
  *
  * @description
- * Converts a parameter value (from URL string or transition param) to a custom/native value.
+ * Converts a parameter value (from URL string or transition param) to a custom.css/native value.
  *
  * @param {string} val  The URL parameter value to decode.
  * @param {string} key  The name of the parameter in which `val` is stored. Can be used for
  *        meta-programming of `Type` objects.
- * @returns {*}  Returns a custom representation of the URL parameter value.
+ * @returns {*}  Returns a custom.css representation of the URL parameter value.
  */
 Type.prototype.decode = function(val, key) {
   return val;
@@ -1146,7 +1146,7 @@ Type.prototype.pattern = /.*/;
 Type.prototype.toString = function() { return "{Type:" + this.name + "}"; };
 
 /*
- * Wraps an existing custom Type as an array of Type, depending on 'mode'.
+ * Wraps an existing custom.css Type as an array of Type, depending on 'mode'.
  * e.g.:
  * - urlmatcher pattern "/path?{queryParam[]:int}"
  * - url: "/path?queryParam=1&queryParam=2
@@ -1366,7 +1366,7 @@ function $UrlMatcherFactory() {
    * @methodOf ui.router.util.$urlMatcherFactory
    *
    * @description
-   * Registers a custom {@link ui.router.util.type:Type `Type`} object that can be used to
+   * Registers a custom.css {@link ui.router.util.type:Type `Type`} object that can be used to
    * generate URLs with typed parameters.
    *
    * @param {string} name  The type name.
@@ -1379,7 +1379,7 @@ function $UrlMatcherFactory() {
    * @returns {Object}  Returns `$urlMatcherFactoryProvider`.
    *
    * @example
-   * This is a simple example of a custom type that encodes and decodes items from an
+   * This is a simple example of a custom.css type that encodes and decodes items from an
    * array, using the array index as the URL-encoded value:
    *
    * <pre>
@@ -1419,7 +1419,7 @@ function $UrlMatcherFactory() {
    * handle encoding and decoding parameter values:
    *
    * <pre>
-   * // Defines a custom type that gets a value from a service,
+   * // Defines a custom.css type that gets a value from a service,
    * // where each service gets different types of values from
    * // a backend API:
    * $urlMatcherFactoryProvider.type('dbObject', {}, function(Users, Posts) {
@@ -1878,7 +1878,7 @@ function $UrlRouterProvider(   $locationProvider,   $urlMatcherFactory) {
    * app.config(function ($urlRouterProvider) {
    *
    *   // Prevent $urlRouter from automatically intercepting URL changes;
-   *   // this allows you to configure custom behavior in between
+   *   // this allows you to configure custom.css behavior in between
    *   // location changes and route synchronization:
    *   $urlRouterProvider.deferIntercept();
    *
@@ -1898,7 +1898,7 @@ function $UrlRouterProvider(   $locationProvider,   $urlMatcherFactory) {
    *     });
    *   });
    *
-   *   // Configures $urlRouter's listener *after* your custom listener
+   *   // Configures $urlRouter's listener *after* your custom.css listener
    *   $urlRouter.listen();
    * });
    * </pre>
@@ -1972,7 +1972,7 @@ function $UrlRouterProvider(   $locationProvider,   $urlMatcherFactory) {
        * @description
        * Triggers an update; the same update that happens when the address bar url changes, aka `$locationChangeSuccess`.
        * This method is useful when you need to use `preventDefault()` on the `$locationChangeSuccess` event,
-       * perform some custom logic (route protection, auth, config, redirection, etc) and then finally proceed
+       * perform some custom.css logic (route protection, auth, config, redirection, etc) and then finally proceed
        * with the transition by calling `$urlRouter.sync()`.
        *
        * @example
@@ -1982,7 +1982,7 @@ function $UrlRouterProvider(   $locationProvider,   $urlMatcherFactory) {
        *     $rootScope.$on('$locationChangeSuccess', function(evt) {
        *       // Halt state change from even starting
        *       evt.preventDefault();
-       *       // Perform custom logic
+       *       // Perform custom.css logic
        *       var meetsRequirement = ...
        *       // Continue with the update and state transition if logic allows
        *       if (meetsRequirement) $urlRouter.sync();
@@ -2331,7 +2331,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
    * @description
    * Allows you to extend (carefully) or override (at your own peril) the 
    * `stateBuilder` object used internally by `$stateProvider`. This can be used 
-   * to add custom functionality to ui-router, for example inferring templateUrl 
+   * to add custom.css functionality to ui-router, for example inferring templateUrl 
    * based on the state name.
    *
    * When passing only a name, it returns the current (original or decorated) builder
@@ -2340,7 +2340,7 @@ function $StateProvider(   $urlRouterProvider,   $urlMatcherFactory) {
    * The builder functions that can be decorated are listed below. Though not all
    * necessarily have a good use case for decoration, that is up to you to decide.
    *
-   * In addition, users can attach custom decorators, which will generate new 
+   * In addition, users can attach custom.css decorators, which will generate new 
    * properties within the state's internal definition. There is currently no clear 
    * use-case for this beyond accessing internal states (i.e. $state.$current), 
    * however, expect this to become increasingly relevant as we introduce additional 
