@@ -1,11 +1,12 @@
-<div class="bg-light lter b-b wrapper-md">
-    <h1 class="m-n font-thin h3">购物车</h1>
-</div>
-<div class="wrapper-md">
-    <div class="row">
-        <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <div ng-controller="CartCtrl">
+
+<div ng-controller="CartCtrl">
+    <div class="bg-light lter b-b wrapper-md">
+        <h1 class="m-n font-thin h3">购物车</h1>
+    </div>
+    <div class="wrapper-md">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8">
                 <div ng-repeat="book in bookCart" style="min-height: 250px;">
                     <div class="row clearfix" style="background-color: #FFFFFF;">
                         <div class="col-lg-1">
@@ -16,7 +17,7 @@
                                 </label>
                             </div>
                         </div>
-                        <div class="col-lg-3" style=margin-top: 15px;">
+                        <div class="col-lg-3" style="margin-top: 15px;">
                             <img src="img/books/{{book.book.category}}/{{book.book.url}}" style="height: 180px;">
                         </div>
                         <div class="col-lg-6" style="margin-top: 15px;">
@@ -46,27 +47,27 @@
             </div>
         </div>
     </div>
-</div>
-<div class="app-footer b-t bg-light cus-fixed" style="position: fixed;">
-    <footer class="panel-footer">
-        <div class="row">
-            <div class="col-lg-2">
+    <div class="app-footer b-t bg-light cus-fixed" style="position: fixed;">
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-lg-2">
 
-            </div>
-            <div class="col-lg-5">
-                <div class="checkbox">
-                    <label class="i-checks i-checks-lg text-lg text-center text-dark">
-                        <input type="checkbox">
-                        <i></i>
-                        全选
-                    </label>
+                </div>
+                <div class="col-lg-5">
+                    <div class="checkbox">
+                        <label class="i-checks i-checks-lg text-lg text-center text-dark">
+                            <input type="checkbox">
+                            <i></i>
+                            全选
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <button type="submit" class="btn btn-lg" ng-disabled="true" ng-style="countBtnStyle">合计: ￥{{billPrice}}</button>
+                    <button type="submit" class="btn btn-danger btn-lg" ng-style="submitBtnStyle" >提交订单</button>
                 </div>
             </div>
-            <div class="col-lg-3">
-                <button type="submit" class="btn btn-lg" ng-disabled="true" ng-style="countBtnStyle" style="width:230px; border:1px solid; border-color: red; background-color: #FFFFFF";>合计: ￥{{billPrice}}</button>
-                <button type="submit" class="btn btn-danger btn-lg" ng-style="submitBtnStyle" style="width:120px;">提交订单</button>
-            </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
 </div>
 
