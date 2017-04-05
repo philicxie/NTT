@@ -1,11 +1,12 @@
+<div ng-controller="MainPageCtrl">
 <div class="bg-light lter b-b wrapper-md">
-    <h1 class="m-n font-thin h3">健康/旅游</h1>
+    <h1 class="m-n font-thin h3">{{PageTitle}}</h1>
 </div>
 <div class="wrapper-md">
     <div class="row">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <div ng-controller="MainPageCtrl">
+            <div>
                 <script type="text/ng-template" id="myModalContent.html">
                     <div ng-include="'pages/modal.html'"></div>
                 </script>
@@ -41,4 +42,5 @@
             </div>
         </div>
     </div>
+</div>
 </div>

@@ -12,9 +12,9 @@ app.controller('MainPageCtrl', ['$modal', '$state', '$scope', '$http', '$localSt
         $scope.user = {};
         $scope.user.name = $localStorage.user.name;
     }
-    console.log('haha');
     $scope.category = $stateParams.category;
-    $scope.items = ['item1', 'item2', 'item3'];
+    var temDic = {"jg":'经济/管理', "kj":'科学/教育', "rw":'人文/社科', 'jl':'健康/旅游'};
+    $scope.PageTitle = temDic[$scope.category];
     $http({
         method:'POST',
         url: '/main/getBooksByCate',
