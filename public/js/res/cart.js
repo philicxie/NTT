@@ -8,6 +8,10 @@ app.controller('CartCtrl', ['$scope', '$http', '$localStorage', function($scope,
     console.log('haha');
     console.log($localStorage.cart);
     $scope.bookCart = $localStorage.cart;
+    
+    $scope.countBtnStyle = {
+        
+    }
     $scope.rmBook = function(index) {
         
     }
