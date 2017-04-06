@@ -13,7 +13,7 @@ app.controller('CartCtrl', ['$scope', '$http', '$localStorage', '$modal', '$stat
     });
     $scope.billPrice = 0;
     $scope.payingAll = false;
-
+    
     // style config -------------------------
     var countBtnWidth = Math.round(window.innerWidth*0.1*1.1) + 'px';
     $scope.countBtnStyle = {
@@ -89,7 +89,7 @@ app.controller('CartCtrl', ['$scope', '$http', '$localStorage', '$modal', '$stat
             console.log(res);
             console.log(Md5.hex_md5(res));
             var bookBill = {
-                userId: 0,
+                userId: $scope.user.userId,
                 token: res.data.token,
                 time: new Date(),
                 books: []
@@ -129,7 +129,7 @@ app.controller('CartCtrl', ['$scope', '$http', '$localStorage', '$modal', '$stat
                             key: bookBill.key
                         }
                     }).then(function success(res) {
-                        $state.go('app.pay');
+                        $state.go('app.pay', {key: bookBill.key});
                     }, function error(err) {
                         console.log(err);
                     });

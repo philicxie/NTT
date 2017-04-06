@@ -12,6 +12,7 @@ var signinRemote        = require('./routes/signinRemote'     );
 var cartRemote          = require('./routes/cartRemote'       );
 var authorityRemote     = require('./routes/authorityRemote'  );
 var booksManageRemote   = require('./routes/booksManageRemote');
+var payRemote           = require('./routes/payRemote'        );
 
 var app = express();
 
@@ -34,6 +35,7 @@ app.use('/signin'       , signinRemote      );
 app.use('/cart'         , cartRemote        );
 app.use('/authority'    , authorityRemote   );
 app.use('/books_manage' , booksManageRemote );
+app.use('/pay'          , payRemote         );
 
 // main----------------------------------
 //var User = require('./routes/db').User;

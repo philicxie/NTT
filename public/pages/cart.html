@@ -35,7 +35,7 @@
                                     <li class="list-group-item">
 
                                         <span class="pull-right" style="width: 120px;">
-                                            <input ui-jq="TouchSpin" type="text" value="{{book.count}}" class="form-control" data-min='1' data-max="10" data-step="1" data-decimals="0" >
+                                            <input ui-jq="TouchSpin" type="text" ng-model="book.count" class="form-control" data-min='1' data-max="10" data-step="1" data-decimals="0" ng-change="countPrice()" ->
                                         </span>
                                         <h4>￥{{book.book.price}}</h4>
                                     </li>

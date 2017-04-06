@@ -68,10 +68,28 @@
     <div class="col bg-white-only">
         <div class="vbox">
             <div class="wrapper b-b">
-
             </div>
-            <div class="row-row">
-
+            <div class="row" style="margin-top: 150px;">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-5">
+                    <img src="img/books/{{book.bookInfo.category}}/{{book.bookInfo.url}}" style="height: 300px;">
+                </div>
+                <div class="col-lg-5">
+                    <div class="panel panel-default">
+                        <div class="list-group no-radius alt">
+                            <div class="list-group-item" href>
+                                <h3><i class="fa fa-book"></i>&nbsp&nbsp{{book.bookInfo.name}}</h3>
+                            </div>
+                            <div class="list-group-item" href>
+                                <h5><i class="icon-pencil"></i>&nbsp&nbsp{{book.bookInfo.author}}</h5>
+                            </div>
+                            <div class="list-group-item" href>
+                                <h3>￥{{book.bookInfo.price}}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-1"></div>
             </div>
         </div>
     </div>

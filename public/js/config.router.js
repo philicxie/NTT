@@ -44,7 +44,7 @@ angular.module('app')
                   }
               })
               .state('apps.books', {
-                  url: '/cart',
+                  url: '/books',
                   templateUrl: 'pages/books_manage.html',
                   resolve: {
                       deps: ['$ocLazyLoad',
@@ -67,6 +67,9 @@ angular.module('app')
               })
               .state('app.pay', {
                   url: '/pay',
+                  params: {
+                      key: null
+                  },
                   templateUrl: 'pages/pay.html',
                   resolve: {
                       deps: ['$ocLazyLoad',

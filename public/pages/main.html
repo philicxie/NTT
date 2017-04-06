@@ -10,13 +10,13 @@
                 <script type="text/ng-template" id="AddCartModal">
                     <div ng-include="'pages/main_modal.html'"></div>
                 </script>
-                <div ng-repeat="book in bookGroup" style="min-height: 300px;">
+                <div ng-repeat="book in bookGroup" style="min-height: 300px; background-color: #ffffff;">
                     <div class="row clearfix">
                         <div class="col-lg-3">
-                            <img src="img/books/{{category}}/{{book.url}}" style="height: 180px;">
+                            <img src="img/books/{{category}}/{{book.url}}" style="height: 180px; margin-top: 60px; margin-left: 30px;">
                         </div>
-                        <div class="col-lg-7">
-                            <div class="panel panel-default">
+                        <div class="col-lg-8">
+                            <div class="panel panel-default" style="margin-top: 20px; margin-left: 50px;">
 
                                 <div class="list-group no-radius alt">
                                     <div class="list-group-item" href>
