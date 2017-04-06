@@ -7,10 +7,14 @@
 app.controller('CartCtrl', ['$scope', '$http', '$localStorage', '$modal', function($scope, $http, $localStorage, $modal) {
     console.log($localStorage.cart);
     $scope.bookCart = $localStorage.cart;
+    $scope.bookCart.map(function(item) {
+        item.paying = false;
+    });
+    $scope.billPrice = 0;
+    $scope.payingAll = false;
 
     // style config -------------------------
     var countBtnWidth = Math.round(window.innerWidth*0.1*1.1) + 'px';
-    console.log(countBtnWidth);
     $scope.countBtnStyle = {
         "width":              countBtnWidth,
         "border":             "1px solid",
@@ -32,23 +36,54 @@ app.controller('CartCtrl', ['$scope', '$http', '$localStorage', '$modal', functi
             size: 'sm'
         });
         rmUserModalInstance.result.then(function success() {
-            // $http({
-            //     method: 'POST',
-            //     url: '/authority/rmUserById',
-            //     data: {_id: userId}
-            // }).then(function success(res){
-            //     $state.reload();
-            // }, function(err) {
-            //     console.log(err);
-            // });
+
         }, function() {
             console.log('dismissed');
         });
+    };
+
+    $scope.choseBook = function(index) {
+        console.log('chose book clicked' + index);
+        console.log($scope.bookCart);
+        $scope.bookCart[index].paying = !$scope.bookCart[index].paying;
+        $scope.payingAll = true;
+        $scope.bookCart.map(function (item){
+            $scope.payingAll &= item.paying;
+        });
+        $scope.countPrice();
+    };
+
+    $scope.choseAll = function() {
+        console.log('chose all');
+        if($scope.payingAll) {
+            $scope.payingAll = false;
+            $scope.bookCart.map(function (item){
+                item.paying = false;
+            });
+        } else {
+            $scope.payingAll = true;
+            $scope.bookCart.map(function (item){
+                item.paying = true;
+            });
+        }
+        $scope.countPrice();
+    }
+    $scope.countPrice = function() {
+        $scope.billPrice = 0;
+        $scope.bookCart.map(function (item){
+            if(item.paying) {
+                $scope.billPrice += item.count * item.book.price;
+            }
+        });
+        $scope.billPrice = Math.round($scope.billPrice*100)/100;
+    }
+    
+    $scope.generateBill = function() {
+        
     }
 }]);
 
 app.controller('RmBookModalCtrl', ['$scope', '$modalInstance', function($scope, $modalInstance) {
-    console.log('rm book modal loaded');
     $scope.temRm = $scope;
 
     $scope.ok = function(){

@@ -15,7 +15,7 @@
                         <div class="col-lg-1">
                             <div class="checkbox" style="margin-top: 100px;">
                                 <label class="i-checks i-checks-lg">
-                                    <input type="checkbox">
+                                    <input type="checkbox" ng-click="choseBook('{{book.index}}')" ng-checked="book.paying">
                                     <i></i>
                                 </label>
                             </div>
@@ -35,7 +35,7 @@
                                     <li class="list-group-item">
 
                                         <span class="pull-right" style="width: 120px;">
-                                            <input ui-jq="TouchSpin" type="text" value="{{book.count}}" class="form-control" data-min='0' data-max="10" data-step="1" data-decimals="0" >
+                                            <input ui-jq="TouchSpin" type="text" value="{{book.count}}" class="form-control" data-min='1' data-max="10" data-step="1" data-decimals="0" >
                                         </span>
                                         <h4>￥{{book.book.price}}</h4>
                                     </li>
@@ -59,7 +59,7 @@
                 <div class="col-lg-5">
                     <div class="checkbox">
                         <label class="i-checks i-checks-lg text-lg text-center text-dark">
-                            <input type="checkbox">
+                            <input type="checkbox" ng-click="choseAll()" ng-checked="payingAll">
                             <i></i>
                             全选
                         </label>
@@ -67,7 +67,7 @@
                 </div>
                 <div class="col-lg-4">
                     <button type="submit" class="btn btn-lg" ng-disabled="true" ng-style="countBtnStyle">合计: ￥{{billPrice}}</button>
-                    <button type="submit" class="btn btn-danger btn-lg" ng-style="submitBtnStyle" >提交订单</button>
+                    <button type="submit" class="btn btn-danger btn-lg" ng-style="submitBtnStyle" ng-click="generateBill()">提交订单</button>
                 </div>
             </div>
         </footer>
