@@ -3,16 +3,21 @@
  */
 'user strict';
 
-app.controller('MainPageCtrl', ['$modal', '$state', '$scope', '$http', '$localStorage', '$stateParams', function($modal, $state, $scope, $http, $localStorage, $stateParams) {
+app.controller('MainPageCtrl', ['$modal', '$state', '$scope', '$http', '$localStorage', '$stateParams', '$rootScope', function($modal, $state, $scope, $http, $localStorage, $stateParams, $rootScope) {
     if($localStorage.cart===undefined) {
         $localStorage.cart = new Array();
     }
+    console.log($scope.user);
     //$localStorage.cart = new Array();
-    if($localStorage.user!==undefined) {
-        $scope.user = {};
-        $scope.user.name = $localStorage.user.name;
-    }
+    $scope.user = $rootScope.user;
+    // if($localStorage.user!==undefined) {
+    //     $scope.user = {};
+    //     $scope.user.name = $localStorage.user.name;
+    // }
     $scope.category = $stateParams.category;
+    if(!$scope.category) {
+        $scope.category = 'jg';
+    }
     var temDic = {"jg":'经济/管理', "kj":'科学/教育', "rw":'人文/社科', 'jl':'健康/旅游'};
     $scope.PageTitle = temDic[$scope.category];
     $http({

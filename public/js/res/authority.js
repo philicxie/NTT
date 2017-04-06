@@ -14,11 +14,11 @@ app.controller('UserInfoCtrl', ['$http', '$scope', '$modal', '$state', function(
                 _id: item._id,
                 account: item.account,
                 name: item.name,
-                au_admin:   Math.round(item.auth_code/16 )%2?true:false,
-                au_jg:      Math.round(item.auth_code/8  )%2?true:false,
-                au_kj:      Math.round(item.auth_code/4  )%2?true:false,
-                au_rw:      Math.round(item.auth_code/2  )%2?true:false,
-                au_jl:      Math.round(item.auth_code    )%2?true:false
+                au_admin:   Math.floor(item.auth_code/16 )%2?true:false,
+                au_jg:      Math.floor(item.auth_code/8  )%2?true:false,
+                au_kj:      Math.floor(item.auth_code/4  )%2?true:false,
+                au_rw:      Math.floor(item.auth_code/2  )%2?true:false,
+                au_jl:      Math.floor(item.auth_code    )%2?true:false
             });
         });
     }, function(err) {

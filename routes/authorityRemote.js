@@ -26,7 +26,7 @@ router.post('/addUser', function(req, res, next) {
                 req.body.au_jg*8 +
                 req.body.au_kj*4 +
                 req.body.au_rw*2 +
-                req.body.au_jk
+                req.body.au_jl
     });
     addUser.save(function(err, doc) {
         if(err) return console.error(err);

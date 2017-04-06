@@ -3,17 +3,16 @@
 /* Controllers */
 
 angular.module('app')
-  .controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$window', 
-    function(              $scope,   $translate,   $localStorage,   $window ) {
+  .controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$window', '$rootScope',
+    function(              $scope,   $translate,   $localStorage,   $window ,  $rootScope) {
       // add 'ie' classes to html
       var isIE = !!navigator.userAgent.match(/MSIE/i);
       isIE && angular.element($window.document.body).addClass('ie');
       isSmartDevice( $window ) && angular.element($window.document.body).addClass('smart');
-      if($localStorage.user!==undefined) {
-        $scope.user = {};
-        $scope.user.name = $localStorage.user.name;
-      }
       // config
+      if(!$rootScope.user) {
+        $rootScope.user = $localStorage.user;
+      }
       $scope.app = {
         name: 'Angulr',
         version: '1.3.3',

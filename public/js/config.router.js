@@ -38,6 +38,17 @@ angular.module('app')
                       ]
                   }
               })
+              .state('app.books', {
+                  url: '/cart',
+                  templateUrl: 'pages/books_manage.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                          function($ocLazyLoad){
+                              return $ocLazyLoad.load(['js/res/cart.js']);
+                          }
+                      ]
+                  }
+              })
               .state('app.cart', {
                   url: '/cart',
                   templateUrl: 'pages/cart.html',
