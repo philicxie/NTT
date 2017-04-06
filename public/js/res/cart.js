@@ -4,7 +4,8 @@
 
 'user strict';
 
-app.controller('CartCtrl', ['$scope', '$http', '$localStorage', '$modal', '$state', function($scope, $http, $localStorage, $modal, $state) {
+app.controller('CartCtrl', ['$scope', '$http', '$localStorage', '$modal', '$state', 'Md5',
+                    function($scope, $http, $localStorage, $modal, $state, Md5) {
     console.log($localStorage.cart);
     $scope.bookCart = $localStorage.cart;
     $scope.bookCart.map(function(item) {
@@ -82,14 +83,63 @@ app.controller('CartCtrl', ['$scope', '$http', '$localStorage', '$modal', '$stat
         console.log('ready to generate bill');
         $http({
             method: 'POST',
-            url: '/cart/newBill',
+            url: '/cart/createBill',
             data: {}
         }).then(function success(res){
             console.log(res);
+            console.log(Md5.hex_md5(res));
+            var bookBill = {
+                userId: 0,
+                token: res.data.token,
+                time: new Date(),
+                books: []
+            };
+            bookBill.key = Md5.hex_md5(bookBill.userId+bookBill.token+bookBill.time);
+            $scope.bookCart.map(function (item){
+                if(item.paying) {
+                    bookBill.books.push(item);
+                }
+            });
+            $http({
+                method: 'POST',
+                url: '/cart/commitBill',
+                data: bookBill
+            }).then(function success(res){
+                //$state.go('app.pay');
+                console.log(res);
+                if(res.data.code === 200) {
+                    var initCart = [];
+                    var temIndex = 0;
+                    $scope.bookCart.map(function (item) {
+                        if (!item.paying) {
+                            initCart.push({
+                                index: temIndex,
+                                count: item.count,
+                                book: item.book,
+                                paying: item.paying
+                            });
+                            temIndex++;
+                        }
+                    });
+                    $scope.bookCart = initCart;
+                    $http({
+                        method: 'POST',
+                        url: '/cart/confirmBill',
+                        data: {
+                            key: bookBill.key
+                        }
+                    }).then(function success(res) {
+                        $state.go('app.pay');
+                    }, function error(err) {
+                        console.log(err);
+                    });
+                }
+            }, function error(err) {
+                console.log(err);
+            })
         }, function error(err){
             console.log(err);
         });
-        //$state.go('app.pay');
     }
 }]);
 

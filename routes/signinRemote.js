@@ -7,20 +7,24 @@ var router = express.Router();
 
 router.post('/checkUser', function(req, res, next) {
     console.log(req.body);
-    var query = {
-        account:  req.body.account,
-        password: req.body.password
-    };
-
-    User.find(query, function(err, doc){
-        if(err) return console.error(err);
-        console.log(doc);
-        if(doc.length===1) {
-            res.send({code: 101, user: doc[0].name});
-        } else {
-            res.send({code: 200});
+    User.find({account: req.body.account}, function(err, doc) {
+        if(err) {
+            res.send({
+                code: 500
+            });
+            return console.error(err);
         }
-        //res.send(doc);
+        console.log(doc);
+        if(doc.length === 1 && req.body.password === doc[0].password) {
+            res.send({
+                code: 200,
+                user: doc[0]
+            });
+        } else {
+            res.send({
+                code: 300
+            });
+        }
     });
 });
 

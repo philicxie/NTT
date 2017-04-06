@@ -17,7 +17,7 @@ router.post('/getBooksInCart', function(req, res, next) {
     });
 });
 
-router.post('/newBill', function(req, res, next) {
+router.post('/createBill', function(req, res, next) {
     var hasToken = function(item) {
         Token.find({token: item}, function(err, doc){
             return (doc.length !== 0);
@@ -41,6 +41,62 @@ router.post('/newBill', function(req, res, next) {
 
 router.post('/commitBill', function(req, res, next) {
     console.log(req.body);
+    Token.find({token: req.body.token}, function (err, doc) {
+        if(err) {
+            res.send({code: 300});
+        } else if(doc.length != 1) {
+            res.send({code: 301});
+        } else {
+            var createTime = doc[0].time.getTime();
+            var commitTime = new Date(req.body.time).getTime();
+            if(commitTime - createTime > 60*1000 || commitTime < createTime) {
+                res.send({code: 302}); // Time out or exception
+            } else {
+                var initBooks = [];
+                var orderPrice = 0;
+                req.body.books.map(function (item) {
+                    initBooks.push({
+                        book: item.book,
+                        count: item.count
+                    });
+                    orderPrice += item.book.price * item.count;
+                });
+                orderPrice = Math.round(orderPrice*100)/100;
+                var initOrder = new Order({
+                    key: req.body.key,
+                    user: req.body.userId,
+                    time: req.body.time,
+                    books: initBooks,
+                    price: orderPrice,
+                    status: 0
+                });
+                console.log(initOrder);
+                initOrder.save(function (err, doc) {
+                    if(err) {
+                        res.send({code: 303});
+                    } else {
+                        res.send({
+                            code: 200
+                        });
+                    }
+                });
+            }
+        }
+    });
+});
+
+router.post('/confirmBill', function(req, res, next) {
+    console.log(req.body);
+    Order.find({key: req.body.key}, function(err, doc) {
+        if(err) res.send({code: 300});
+        if(doc[0].status === 0) {
+            doc[0].status = 1;
+            doc[0].save();
+            res.send({code: 200});
+        } else {
+            res.send({code: 301});
+        }
+    });
 });
 
 module.exports = router;

@@ -23,10 +23,9 @@ var userSchema = mongoose.Schema({
 });
 
 var orderSchema = mongoose.Schema({
-    index: Number,
     key: String,
     user: String,
-    books: [String],
+    books: mongoose.Schema.Types.Mixed,
     time: Date,
     status: Number //[0: init, 1: unpay, 2: queued]
 });
