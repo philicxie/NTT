@@ -28,7 +28,13 @@ var orderSchema = mongoose.Schema({
     user: String,
     books: [String],
     time: Date,
-    status: Number
+    status: Number //[0: init, 1: unpay, 2: queued]
+});
+
+var tokenSchema = mongoose.Schema({
+    token: Number,
+    time: Date,
+    status: Number //[0: ok, 1: inused, 2: timeout]
 });
 
 
@@ -37,3 +43,5 @@ module.exports.book = mongoose.model('Books', bookSchema);
 module.exports.user = mongoose.model('Users', userSchema);
 
 module.exports.order = mongoose.model('Orders', orderSchema);
+
+module.exports.token = mongoose.model('Tokens', tokenSchema);

@@ -4,7 +4,7 @@
 
 'user strict';
 
-app.controller('CartCtrl', ['$scope', '$http', '$localStorage', '$modal', function($scope, $http, $localStorage, $modal) {
+app.controller('CartCtrl', ['$scope', '$http', '$localStorage', '$modal', '$state', function($scope, $http, $localStorage, $modal, $state) {
     console.log($localStorage.cart);
     $scope.bookCart = $localStorage.cart;
     $scope.bookCart.map(function(item) {
@@ -79,7 +79,17 @@ app.controller('CartCtrl', ['$scope', '$http', '$localStorage', '$modal', functi
     }
     
     $scope.generateBill = function() {
-        
+        console.log('ready to generate bill');
+        $http({
+            method: 'POST',
+            url: '/cart/newBill',
+            data: {}
+        }).then(function success(res){
+            console.log(res);
+        }, function error(err){
+            console.log(err);
+        });
+        //$state.go('app.pay');
     }
 }]);
 
