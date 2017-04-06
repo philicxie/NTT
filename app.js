@@ -5,12 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-var mainRemote = require('./routes/mainRemote');
-var signinRemote = require('./routes/signinRemote');
-var cartRemote = require('./routes/cartRemote');
-var authorityRemote = require('./routes/authorityRemote');
+var index               = require('./routes/index'            );
+var users               = require('./routes/users'            );
+var mainRemote          = require('./routes/mainRemote'       );
+var signinRemote        = require('./routes/signinRemote'     );
+var cartRemote          = require('./routes/cartRemote'       );
+var authorityRemote     = require('./routes/authorityRemote'  );
+var booksManageRemote   = require('./routes/booksManageRemote');
 
 var app = express();
 
@@ -26,13 +27,13 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
-
-app.use('/main', mainRemote);
-app.use('/signin', signinRemote);
-app.use('/cart', cartRemote);
-app.use('/authority', authorityRemote);
+app.use('/'             , index             );
+app.use('/users'        , users             );
+app.use('/main'         , mainRemote        );
+app.use('/signin'       , signinRemote      );
+app.use('/cart'         , cartRemote        );
+app.use('/authority'    , authorityRemote   );
+app.use('/books_manage' , booksManageRemote );
 
 // main----------------------------------
 //var User = require('./routes/db').User;

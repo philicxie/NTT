@@ -5,7 +5,7 @@
   app.settings.container = false;
   app.hideAside = false;
   app.hideFooter = false;
-  " ng-controller="ContactCtrl">
+  " ng-controller="BooksManageCtrl">
 
     <!-- column -->
     <div class="col w b-r">
@@ -14,10 +14,10 @@
                 <div class="cell scrollable hover">
                     <div class="cell-inner">
                         <div class="list-group no-radius no-border no-bg m-b-none">
-                            <a class="list-group-item b-b" ng-class="{'focus': (filter == '')}" ng-click="selectGroup({name:''})">所有设备</a>
-                            <a ng-repeat="item in groups" ng-dblclick="editItem(item)" class="list-group-item m-l hover-anchor b-a no-select" ng-class="{'focus m-l-none': item.selected}" ng-click="selectGroup(item)">
+                            <a class="list-group-item b-b" ng-class="{'focus': (filter == '')}" ng-click="selectGroup({name:''})">所有书籍</a>
+                            <a ng-repeat="item in bookCates" ng-dblclick="editItem(item)" class="list-group-item m-l hover-anchor b-a no-select" ng-class="{'focus m-l-none': item.selected}" ng-click="selectGroup(item)">
                                 <span ng-click='deleteGroup(item)' class="pull-right text-muted hover-action"><i class="fa fa-times"></i></span>
-                                <span class="block m-l-n" ng-class="{'m-n': item.selected }">{{ item.name ? item.name : 'Untitled' }}</span>
+                                <span class="block m-l-n" ng-class="{'m-n': item.selected }">{{ item.cate ? item.cate : 'Untitled' }}</span>
                                 <input type="text" class="form-control pos-abt" ng-show="item.editing" ng-blur="doneEditing(item)" ng-model="item.name" style="top:3px;left:2px;width:98%" ui-focus="item.editing">
                             </a>
                         </div>
@@ -33,7 +33,7 @@
             <div class="wrapper-xs b-b">
                 <div class="input-group m-b-xxs">
                     <span class="input-group-addon input-sm no-border no-bg"><i class="icon-magnifier text-md m-t-xxs"></i></span>
-                    <input type="text" class="form-control input-sm no-border no-bg text-md" placeholder="在 {{group.name ? group.name : '所有设备'}} 中搜索" ng-model="query">
+                    <input type="text" class="form-control input-sm no-border no-bg text-md" placeholder="在 {{bookCate.cate ? bookCate.cate : '所有书籍'}} 中搜索" ng-model="query">
                 </div>
             </div>
             <div class="row-row">
@@ -41,16 +41,16 @@
                     <div class="cell-inner">
                         <div class="m-t-n-xxs">
                             <div class="list-group list-group-lg no-radius no-border no-bg m-b-none">
-                                <a ng-repeat="item in items | filter:filters | filter:query | orderBy:'uid'" class="list-group-item m-l" ng-class="{'select m-l-none': item.selected }" ng-click="selectItem(item)">
+                                <a ng-repeat="item in books | filter:filters | filter:query " class="list-group-item m-l" ng-class="{'select m-l-none': item.selected }" ng-click="selectItem(item)">
                                   <span class="block text-ellipsis m-l-n text-md" ng-class="{'m-l-none': item.selected }">
                                     <!--{{ item.first }} <strong>{{ item.last }}</strong>-->
-                                      <strong>{{item.uid}}</strong>
+                                      <strong>{{item.bookInfo.name}}</strong>
                                       <!--<span ng-hide="item.first || item.last">No Name</span>-->
                                   </span>
                                 </a>
                             </div>
                         </div>
-                        <div class="text-center pos-abt w-full" style="top:50%;" ng-hide="(items | filter:filters | filter:query).length">无符合条件结果</div>
+                        <div class="text-center pos-abt w-full" style="top:50%;" ng-hide="(books | filter:filters | filter:query).length">无符合条件结果</div>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                 <script type="text/ng-template" id="NewFacility">
                     <div ng-include="'pages/_facility_modal.html'"></div>
                 </script>
-                <a href class="btn btn-sm btn-default btn-addon" ng-click="createItem()"><i class="fa fa-plus fa-fw m-r-xs"></i> 新增设备</a>
+                <a href class="btn btn-sm btn-default btn-addon" ng-click="createItem()"><i class="fa fa-plus fa-fw m-r-xs"></i> 新增书籍</a>
             </div>
         </div>
     </div>
@@ -68,41 +68,10 @@
     <div class="col bg-white-only">
         <div class="vbox">
             <div class="wrapper b-b">
-                <div class="m-t-n-xxs m-b-n-xxs m-l-xs">
-                    <a class="btn btn-xs btn-default pull-right" ng-hide="!item" ng-click="deleteItem(item)"><i class="fa fa-times"></i></a>
-                    <a class="btn btn-xs btn-default" ng-hide="item.editing" ng-click="editItem(item)">Edit</a>
-                    <a class="btn btn-xs btn-default" ng-show="item.editing" ng-click="doneEditing(item)">Done</a>
-                </div>
+
             </div>
             <div class="row-row">
-                <div class="wrapper" ng-controller="BMapCtrl">
-                    <div class="form-group" id="allmap" ng-style="mapStyle"></div>
-                    <!--<div class="row clearfix" style="background-color: #FFFFFF;">-->
-                    <!--<div class="col-lg-1">-->
-                    <!--</div>-->
-                    <!--<div class="col-lg-3" style="margin-top: 15px;">-->
-                    <!--<img src="img/books/{{book.book.category}}/{{book.book.url}}" style="height: 180px;">-->
-                    <!--</div>-->
-                    <!--<div class="col-lg-6" style="margin-top: 15px;">-->
-                    <!--<div class="panel panel-default">-->
-                    <!--<ul class="list-group no-radius">-->
-                    <!--<li class="list-group-item">-->
-                    <!--<h3><i class="fa fa-book"></i>&nbsp&nbsp{{book.book.name}}</h3>-->
-                    <!--</li>-->
-                    <!--<li class="list-group-item">-->
-                    <!--<h5><i class="icon-pencil"></i>&nbsp&nbsp{{book.book.author}}</h5>-->
-                    <!--</li>-->
-                    <!--<li class="list-group-item">-->
-                    <!--<span class="pull-right" style="width: 120px;">-->
-                    <!--<h4>× {{book.count}}</h4>-->
-                    <!--</span>-->
-                    <!--<h4>￥{{book.book.price}}</h4>-->
-                    <!--</li>-->
-                    <!--</ul>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                </div>
+
             </div>
         </div>
     </div>

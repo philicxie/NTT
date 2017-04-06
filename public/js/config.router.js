@@ -49,7 +49,7 @@ angular.module('app')
                   resolve: {
                       deps: ['$ocLazyLoad',
                           function($ocLazyLoad){
-                              return $ocLazyLoad.load(['js/res/cart.js']);
+                              return $ocLazyLoad.load(['js/res/booksManage.js']);
                           }
                       ]
                   }
