@@ -4,8 +4,7 @@
 
 'user strict';
 
-app.controller('CartCtrl', ['$scope', '$http', '$localStorage', function($scope, $http, $localStorage) {
-    console.log('haha');
+app.controller('CartCtrl', ['$scope', '$http', '$localStorage', '$modal', function($scope, $http, $localStorage, $modal) {
     console.log($localStorage.cart);
     $scope.bookCart = $localStorage.cart;
 
@@ -26,6 +25,37 @@ app.controller('CartCtrl', ['$scope', '$http', '$localStorage', function($scope,
     };
     //!style config -------------------------
     $scope.rmBook = function(index) {
-        
+        console.log('rm user clicked' + index);
+        var rmUserModalInstance = $modal.open({
+            templateUrl: 'RmBook',
+            controller: 'RmBookModalCtrl',
+            size: 'sm'
+        });
+        rmUserModalInstance.result.then(function success() {
+            // $http({
+            //     method: 'POST',
+            //     url: '/authority/rmUserById',
+            //     data: {_id: userId}
+            // }).then(function success(res){
+            //     $state.reload();
+            // }, function(err) {
+            //     console.log(err);
+            // });
+        }, function() {
+            console.log('dismissed');
+        });
     }
+}]);
+
+app.controller('RmBookModalCtrl', ['$scope', '$modalInstance', function($scope, $modalInstance) {
+    console.log('rm book modal loaded');
+    $scope.temRm = $scope;
+
+    $scope.ok = function(){
+        $modalInstance.close();
+    };
+
+    $scope.cancel = function() {
+        $modalInstance.dismiss('cancel');
+    };
 }]);

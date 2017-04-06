@@ -22,17 +22,17 @@ app.controller('MainPageCtrl', ['$modal', '$state', '$scope', '$http', '$localSt
             category: $scope.category
         }
     }).then(function success(res){
-        console.log(res);
         $scope.bookGroup = res.data;
-        
     }, function error(err){
         console.log(err);
     });
-    
+
     $scope.oneAtATime = true;
-    
+
     $scope.addCart = function(temBook) {
         temBook = JSON.parse(temBook);
+        console.log(temBook);
+        console.log($localStorage.cart);
         var hadAdded = false;
         for(var i=0;i<$localStorage.cart.length;i++) {
             if($localStorage.cart[i].book._id===temBook._id) {
@@ -40,6 +40,7 @@ app.controller('MainPageCtrl', ['$modal', '$state', '$scope', '$http', '$localSt
                 hadAdded = true;
             }
         }
+        console.log('get here');
         if(!hadAdded){
             var newBook = {
                 index: $localStorage.cart.length,
@@ -50,8 +51,8 @@ app.controller('MainPageCtrl', ['$modal', '$state', '$scope', '$http', '$localSt
             $localStorage.cart.push(newBook);
         }
         $modal.open({
-            templateUrl: 'myModalContent.html',
-            controller: 'ModalInstanceCtrl',
+            templateUrl: 'AddCartModal',
+            controller: 'AddCartSuccessCtrl',
             size: '',
             resolve: {
                 items: function () {
@@ -72,6 +73,16 @@ app.controller('MainPageCtrl', ['$modal', '$state', '$scope', '$http', '$localSt
         //$localStorage.bookBill.books = [];
         $localStorage.bookBill.books.push(newBook);
         $state.go('app.pay');
+    }
+}]);
+
+app.controller('AddCartSuccessCtrl', ['$scope', '$modalInstance', 'items', '$state', function($scope, $modalInstance, items, $state) {
+    console.log('rm book modal loaded');
+    $scope.temRm = $scope;
+
+    $scope.cancel = function() {
+        console.log('hit eee');
+        $modalInstance.close();
     }
     $scope.urefCart = function() {
         console.log('to go');
