@@ -24,6 +24,11 @@ angular.module('app')
                   url: '/app',
                   templateUrl: 'pages/layout.html'
               })
+              .state('apps', {
+                  abstract: true,
+                  url: '/app',
+                  templateUrl: 'pages/layout_2.html'
+              })
               .state('app.main', {
                   url: '/main',
                   params: {
@@ -38,7 +43,7 @@ angular.module('app')
                       ]
                   }
               })
-              .state('app.books', {
+              .state('apps.books', {
                   url: '/cart',
                   templateUrl: 'pages/books_manage.html',
                   resolve: {
@@ -510,11 +515,6 @@ angular.module('app')
                           return uiLoad.load( ['js/controllers/tab.js'] );
                       }]
                   }
-              })
-              .state('apps', {
-                  abstract: true,
-                  url: '/apps',
-                  templateUrl: 'tpl/layout.html'
               })
               .state('apps.note', {
                   url: '/note',
