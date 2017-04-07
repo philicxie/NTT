@@ -32,7 +32,7 @@ app.controller('UserInfoCtrl', ['$http', '$scope', '$modal', '$state', function(
             au_jg: false,
             au_kj: false,
             au_rw: false,
-            au_jk: false
+            au_jl: false
         };
         console.log('add user click');
         var addUserModalInstance = $modal.open({
