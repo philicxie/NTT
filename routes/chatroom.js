@@ -5,6 +5,8 @@
 
 module.exports = function (socket) {
     console.log('someone connected');
-    console.log(global.tem);
-    this.emit('news', {hello: 'chat remote world'});
+    console.log(socket.nsp);
+    console.log(this);
+    console.log(this === socket.nsp);
+    socket.emit('news', {hello: 'chat remote world'});
 };

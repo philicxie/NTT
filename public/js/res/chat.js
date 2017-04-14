@@ -64,6 +64,11 @@ app.controller('ChatCtrl', ['$scope', '$http', '$localStorage', '$modal', '$stat
             $scope.roomList[index].selected = true;
             $scope.chosenRoom = $scope.roomList[index];
         };
+
+        $scope.sendMessage = function() {
+            console.log($scope.messageBuffer);
+            $scope.messageBuffer = '';
+        }
     }
 ]);
 
