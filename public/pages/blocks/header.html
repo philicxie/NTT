@@ -1,46 +1,49 @@
-      <!-- navbar header -->
-      <div class="navbar-header {{app.settings.navbarHeaderColor}}">
-        <button class="pull-right visible-xs dk" ui-toggle-class="show" data-target=".navbar-collapse">
-          <i class="glyphicon glyphicon-cog"></i>
-        </button>
-        <button class="pull-right visible-xs" ui-toggle-class="off-screen" data-target=".app-aside" ui-scroll="app">
-          <i class="glyphicon glyphicon-align-justify"></i>
-        </button>
-        <!-- brand -->
-        <a href="#/" class="navbar-brand text-lt">
-          <i class="fa fa-btc"></i>
-          <img src="img/logo.png" alt="." class="hide">
-          <span class="hidden-folded m-l-xs">BookStore</span>
-        </a>
-        <!-- / brand -->
-      </div>
-      <!-- / navbar header -->
+<!-- navbar header -->
+<div class="navbar-header {{app.settings.navbarHeaderColor}}">
+    <button class="pull-right visible-xs dk" ui-toggle-class="show" data-target=".navbar-collapse">
+        <i class="glyphicon glyphicon-cog"></i>
+    </button>
+    <button class="pull-right visible-xs" ui-toggle-class="off-screen" data-target=".app-aside" ui-scroll="app">
+        <i class="glyphicon glyphicon-align-justify"></i>
+    </button>
+    <!-- brand -->
+    <a href="#/" class="navbar-brand text-lt">
+        <i class="fa fa-btc"></i>
+        <img src="img/logo.png" alt="." class="hide">
+        <span class="hidden-folded m-l-xs">BookStore</span>
+    </a>
+    <!-- / brand -->
+</div>
+<!-- / navbar header -->
 
-      <!-- navbar collapse -->
-      <div class="collapse pos-rlt navbar-collapse box-shadow {{app.settings.navbarCollapseColor}}">
-        <ul class="nav navbar-nav navbar-right">
-          <li class="hidden-xs">
+<!-- navbar collapse -->
+<div class="collapse pos-rlt navbar-collapse box-shadow {{app.settings.navbarCollapseColor}}">
+    <ul class="nav navbar-nav navbar-right">
+        <li class="hidden-xs">
             <a ui-fullscreen></a>
-          </li>
-          <li class="dropdown" dropdown>
+        </li>
+        <li class="dropdown" dropdown>
             <a href class="dropdown-toggle clear" dropdown-toggle>
-              <span class="hidden-sm hidden-md">{{user.name}}</span> <b class="caret"></b>
+                <span class="hidden-sm hidden-md">{{user.name}}</span> <b class="caret"></b>
             </a>
             <ul class="dropdown-menu animated fadeInRight w">
-              <li ng-show=false>
-                <a ui-sref="app.cart">个人资料</a>
-              </li>
-              <li ng-show=true>
-                <a ui-sref="app.cart">购物车</a>
-              </li>
-              <li ng-show=false>
-                <a ui-sref="app.cart">我的订单</a>
-              </li>
-              <li class="divider"></li>
-              <li>
-                <a ui-sref="signin">登录</a>
-              </li>
+                <li ng-show=false>
+                    <a ui-sref="app.cart">个人资料</a>
+                </li>
+                <li ng-show=true>
+                    <a ui-sref="app.cart">购物车</a>
+                </li>
+                <li ng-show=false>
+                    <a ui-sref="app.cart">我的订单</a>
+                </li>
+                <li ng-show=true>
+                    <a ui-sref="app.chat">客服帮助</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a ui-sref="signin">登录</a>
+                </li>
             </ul>
-          </li>
-        </ul>
-      </div>
+        </li>
+    </ul>
+</div>

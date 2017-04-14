@@ -101,6 +101,17 @@ angular.module('app')
                       ]
                   }
               })
+              .state('app.chat', {
+                  url: '/chat',
+                  templateUrl: 'pages/chat.html',
+                  resolve: {
+                      deps: ['$ocLazyLoad',
+                          function($ocLazyLoad){
+                              return $ocLazyLoad.load(['js/res/chat.js']);
+                          }
+                      ]
+                  }
+              })
               .state('app.dashboard-v1', {
                   url: '/dashboard-v1',
                   templateUrl: 'tpl/app_dashboard_v1.html',
