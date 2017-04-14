@@ -13,6 +13,7 @@ var cartRemote          = require('./routes/cartRemote'       );
 var authorityRemote     = require('./routes/authorityRemote'  );
 var booksManageRemote   = require('./routes/booksManageRemote');
 var payRemote           = require('./routes/payRemote'        );
+var chatRemote          = require('./routes/chatRemote'       );
 
 var app = express();
 
@@ -49,22 +50,32 @@ app.use('/cart'         , cartRemote        );
 app.use('/authority'    , authorityRemote   );
 app.use('/books_manage' , booksManageRemote );
 app.use('/pay'          , payRemote         );
+app.use('/chat'         , chatRemote        );
 
 // main----------------------------------
 
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
-io.on('connection', function(socket) {
-  socket.emit('news', {hello: 'world'});
-  socket.on('my other event', function(data) {
-    console.log(data);
-  });
-});
-
 server.listen(3000, function() {
   console.log('listening on *: 3000');
 });
+
+// io.on('connection', function(socket) {
+//   socket.emit('news', {hello: 'world'});
+//   socket.on('my other event', function(data) {
+//     console.log(data);
+//   });
+// });
+
+var chatroom = io.of('/chat');
+
+chatroom.on('connection', require('./routes/chatroom'));
+// chatroom.on('connection', function(socket) {
+//   console.log('someone connected');
+//   nsp.emit('news', {hello: 'chat remote world'});
+// });
+
 //var User = require('./routes/db').User;
 // var Book = require('./routes/db').Book;
 //

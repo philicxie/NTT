@@ -9,7 +9,8 @@
 
 app.controller('ChatCtrl', ['$scope', '$http', '$localStorage', '$modal', '$state',
     function($scope, $http, $localStorage, $modal, $state) {
-        var socket = io.connect();
+        var socket = io.connect('/chat');
+        console.log(socket);
         socket.on('news', function (data) {
             console.log(data);
             socket.emit('my other event', {my: 'data'});

@@ -1,6 +1,6 @@
 <div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="ChatCtrl">
     <!-- .col -->
-    <div class="col w-lg bg-light dk b-r bg-auto" id="aside">
+    <div class="col w-lg bg-light b-r bg-auto" style="position: fixed;">
         <div class="wrapper bg b-b">
             <button class="btn btn-sm btn-success pull-right" ui-toggle-class="timeline-center" target=".timeline">Center</button>
             <h3 class="m-n font-thin">Timeline</h3>
@@ -44,7 +44,7 @@
     <!-- .col -->
     <div class="col">
         <div class="wrapper">
-            <ul class="timeline" style="margin-bottom: 200px;">
+            <ul class="timeline" style="margin-bottom: 200px; margin-left: -280px;">
                 <li class="tl-item">
                     <div class="tl-wrap b-info">
                         <span class="tl-date">5s ago</span>
@@ -168,7 +168,7 @@
                 </li>
             </ul>
             <div class="app-footer wrapper bg-white"
-                 style="position: fixed; margin-left: 480px; border-top: 2px solid #dddddd;">
+                 style="position: fixed; margin-left: 480px; border-top: 1px solid #dddddd;">
                 <footer>
                     <div class="panel panel-default m-t-md m-b-n-sm pos-rlt">
                         <form>
