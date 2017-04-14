@@ -33,6 +33,7 @@ router.post('/initRoom', function(req, res, next) {
                 title: doc[0].name,
                 host: {
                     userId: doc[0]._id,
+                    username: doc[0].name,
                     socketId: req.body.socketId
                 },
                 status: 0,
@@ -49,8 +50,18 @@ router.post('/initRoom', function(req, res, next) {
                 code: 301
             });
         }
-
     });
+});
+
+router.post('/joinRoom', function(req, res, next) {
+    console.log(req.body);
+    var chatRoom = global.activeRooms[req.body.index];
+    var initGuest = {
+        userId: req.body.userId,
+        username: req.body.username,
+        socketId: req.body.socketId
+    };
+    global.activeRooms[req.body.index].guests.push(initGuest);
 });
 
 

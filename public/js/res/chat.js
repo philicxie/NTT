@@ -54,8 +54,6 @@ app.controller('ChatCtrl', ['$scope', '$http', '$localStorage', '$modal', '$stat
                         for(var i=0;i<$scope.roomList.length-1;i++) {
                             $scope.roomList[i].selected = false;
                         }
-
-
                     }
                 });
             }
@@ -68,6 +66,8 @@ app.controller('ChatCtrl', ['$scope', '$http', '$localStorage', '$modal', '$stat
             });
             $scope.roomList[index].selected = true;
             $scope.chosenRoom = $scope.roomList[index];
+            
+            
         };
 
         $scope.sendMessage = function() {
