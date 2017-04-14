@@ -9,12 +9,12 @@
 
 app.controller('ChatCtrl', ['$scope', '$http', '$localStorage', '$modal', '$state',
     function($scope, $http, $localStorage, $modal, $state) {
-        var socket = io.connect('/chat');
-        console.log(socket);
-        socket.on('news', function (data) {
-            console.log(data);
-            socket.emit('my other event', {my: 'data'});
-        });
+        $scope.socket = io.connect('/chat');
+        // console.log(socket);
+        // socket.on('news', function (data) {
+        //     console.log(data);
+        //     socket.emit('my other event', {my: 'data'});
+        // });
         $scope.roomList = [];
         $scope.chosenRoom = {};
         $http({
@@ -39,7 +39,10 @@ app.controller('ChatCtrl', ['$scope', '$http', '$localStorage', '$modal', '$stat
                 $http({
                     method: 'POST',
                     url: '/chat/initRoom',
-                    data: {userId: $scope.user.userId}
+                    data: {
+                        userId: $scope.user.userId,
+                        socketId: $scope.socket.id
+                    }
                 }).then(function success(res) {
                     console.log(res);
                     if(res.data.code === 200) {
@@ -51,6 +54,8 @@ app.controller('ChatCtrl', ['$scope', '$http', '$localStorage', '$modal', '$stat
                         for(var i=0;i<$scope.roomList.length-1;i++) {
                             $scope.roomList[i].selected = false;
                         }
+
+
                     }
                 });
             }

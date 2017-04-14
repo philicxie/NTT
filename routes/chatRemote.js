@@ -28,14 +28,16 @@ router.post('/initRoom', function(req, res, next) {
             });
             return console.error(err);
         }
-        console.log(doc);
-
         if(doc[0].auth_code%16) {
             var chatRoom = {
                 title: doc[0].name,
-                url:   doc[0]._id,
+                host: {
+                    userId: doc[0]._id,
+                    socketId: req.body.socketId
+                },
                 status: 0,
-                index: global.activeRooms.length
+                index: global.activeRooms.length,
+                guests: []
             };
             global.activeRooms.push(chatRoom);
             res.send({
