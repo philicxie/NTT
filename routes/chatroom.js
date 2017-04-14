@@ -5,5 +5,6 @@
 
 module.exports = function (socket) {
     console.log('someone connected');
+    console.log(global.tem);
     this.emit('news', {hello: 'chat remote world'});
 };

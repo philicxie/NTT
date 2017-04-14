@@ -15,6 +15,30 @@ app.controller('ChatCtrl', ['$scope', '$http', '$localStorage', '$modal', '$stat
             console.log(data);
             socket.emit('my other event', {my: 'data'});
         });
+        $scope.roomList = [];
+        $scope.chosenRoom = {};
+        $http({
+            method: 'POST',
+            url: '/chat/getActiveRooms',
+            data: {}
+        }).then(function success(res) {
+            console.log(res.data);
+            if(res.data.code === 200) {
+                $scope.roomList = res.data.rooms;
+            }
+        });
+        $scope.initRoom = function() {
+            console.log($scope.user);
+            if($scope.user && $scope.user.au_manager) {
+                $http({
+                    method: 'POST',
+                    url: '/chat/initRoom',
+                    data: {userId: $scope.user.userId}
+                }).then(function success(res) {
+
+                })
+            }
+        }
     }
 ]);
 
