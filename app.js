@@ -16,6 +16,19 @@ var payRemote           = require('./routes/payRemote'        );
 
 var app = express();
 
+
+app.all('*', function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
+  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+
+  if (req.method == 'OPTIONS') {
+    res.send(200);
+  }
+  else {
+    next();
+  }
+});
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -38,6 +51,20 @@ app.use('/books_manage' , booksManageRemote );
 app.use('/pay'          , payRemote         );
 
 // main----------------------------------
+
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
+io.on('connection', function(socket) {
+  socket.emit('news', {hello: 'world'});
+  socket.on('my other event', function(data) {
+    console.log(data);
+  });
+});
+
+server.listen(3000, function() {
+  console.log('listening on *: 3000');
+});
 //var User = require('./routes/db').User;
 // var Book = require('./routes/db').Book;
 //
