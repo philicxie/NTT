@@ -45,9 +45,6 @@
     <div class="col">
         <div class="wrapper">
             <ul class="timeline">
-                <li class="tl-header">
-                    <div class="btn btn-info">Now</div>
-                </li>
                 <li class="tl-item">
                     <div class="tl-wrap b-info">
                         <span class="tl-date">5s ago</span>
@@ -170,7 +167,24 @@
                     <div class="btn btn-sm btn-default btn-rounded">more</div>
                 </li>
             </ul>
+            <div class="app-footer bg-danger" style="position: fixed; margin-left: 480px;" >
+                <footer >
+                    <div class="row">
+                        <div class="col-lg-2"></div>
+                        <div class="col-lg-5">
+                            <div class="checkbox">
+                                <label class="i-checks i-checks-lg text-lg text-center text-dark">
+                                    <input type="checkbox" ng-click="choseAll()" ng-checked="payingAll">
+                                    <i></i>
+                                    全选
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
         </div>
+
     </div>
     <!-- /.col -->
 </div>
