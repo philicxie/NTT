@@ -22,9 +22,34 @@ router.post('/getActiveRooms', function(req, res, next) {
 router.post('/initRoom', function(req, res, next) {
     console.log(req.body);
     User.find({_id: req.body.userId}, function(err, doc) {
-        
-    })
-})
+        if(err) {
+            res.send({
+                code: 300
+            });
+            return console.error(err);
+        }
+        console.log(doc);
+
+        if(doc[0].auth_code%16) {
+            var chatRoom = {
+                title: doc[0].name,
+                url:   doc[0]._id,
+                status: 0,
+                index: global.activeRooms.length
+            };
+            global.activeRooms.push(chatRoom);
+            res.send({
+                code: 200,
+                room: chatRoom
+            });
+        } else {
+            res.send({
+                code: 301
+            });
+        }
+
+    });
+});
 
 
 

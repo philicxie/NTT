@@ -24,8 +24,14 @@ app.controller('ChatCtrl', ['$scope', '$http', '$localStorage', '$modal', '$stat
         }).then(function success(res) {
             console.log(res.data);
             if(res.data.code === 200) {
-                $scope.roomList = res.data.rooms;
+                res.data.rooms.map(function(item) {
+                    $scope.roomList.push({
+                        selected: false,
+                        roomInfo: item
+                    });
+                });
             }
+            console.log($scope.roomList);
         });
         $scope.initRoom = function() {
             console.log($scope.user);
@@ -35,10 +41,29 @@ app.controller('ChatCtrl', ['$scope', '$http', '$localStorage', '$modal', '$stat
                     url: '/chat/initRoom',
                     data: {userId: $scope.user.userId}
                 }).then(function success(res) {
-
-                })
+                    console.log(res);
+                    if(res.data.code === 200) {
+                        $scope.roomList.push({
+                            selected: true,
+                            roomInfo: res.data.room
+                        });
+                        $scope.chosenRoom = res.data.room;
+                        for(var i=0;i<$scope.roomList.length-1;i++) {
+                            $scope.roomList[i].selected = false;
+                        }
+                    }
+                });
             }
-        }
+        };
+
+        $scope.enterRoom = function(index) {
+            console.log('enter room '+ index);
+            $scope.roomList.map(function (item) {
+                item.selected = false;
+            });
+            $scope.roomList[index].selected = true;
+            $scope.chosenRoom = $scope.roomList[index];
+        };
     }
 ]);
 

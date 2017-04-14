@@ -1,29 +1,38 @@
 <div class="hbox hbox-auto-xs hbox-auto-sm" ng-controller="ChatCtrl">
     <!-- .col -->
     <div class="col w-lg bg-light b-r bg-auto" style="position: fixed;">
-        <div class="wrapper bg b-b">
-            <button class="btn btn-sm btn-success pull-right" ng-click="initRoom()">新建频道</button>
-            <h3 class="m-n font-thin">聊天室</h3>
-        </div>
-        <div class="wrapper">
-            <div class="list-group list-group-lg no-radius no-border no-bg m-b-none">
-                <a ng-repeat="item in books | filter:filters | filter:query " class="list-group-item m-l"
-                   ng-class="{'select m-l-none': item.selected }" ng-click="selectItem(item)">
-                      <span class="block text-ellipsis m-l-n text-md" ng-class="{'m-l-none': item.selected }">
-                        <!--{{ item.first }} <strong>{{ item.last }}</strong>-->
-                          <strong>{{item.bookInfo.name}}</strong>
-                          <!--<span ng-hide="item.first || item.last">No Name</span>-->
-                      </span>
-                </a>
+        <div class="vbox">
+            <div class="wrapper bg b-b">
+                <button class="btn btn-sm btn-success pull-right" ng-click="initRoom()">新建频道</button>
+                <h3 class="m-n font-thin">聊天室</h3>
             </div>
-            <div class="text-center pos-abt w-full" style="top:50%; margin-left: -20px;" ng-hide="activeRooms.length"><strong class="h4">无可用的频道</strong></div>
+            <div class="row-row">
+                <div class="cell scrollable hover">
+                    <div class="cell-inner">
+                        <div class="m-t-n-xxs">
+                            <div class="list-group list-group-lg no-radius no-border no-bg m-b-none">
+                                <a ng-repeat="room in roomList" class="list-group-item m-l"
+                                   ng-class="{'select m-l-none': room.selected }"
+                                   ng-click="enterRoom(room.roomInfo.index)">
+                                <span class="block text-ellipsis m-l-n text-md" ng-class="{'m-l-none': room.selected }">
+                                <!--{{ item.first }} <strong>{{ item.last }}</strong>-->
+                                <strong>{{room.roomInfo.title}}</strong>
+                                    <!--<span ng-hide="item.first || item.last">No Name</span>-->
+                                </span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="text-center pos-abt w-full" style="top:50%;" ng-hide="roomList.length"><strong class="h4">无可用的频道</strong></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- /.col -->
     <!-- .col -->
     <div class="col">
         <div class="wrapper">
-            <ul class="timeline" style="margin-bottom: 200px; margin-left: -280px;">
+            <ul class="timeline" style="margin-bottom: 150px; margin-left: -280px;">
                 <li class="tl-item">
                     <div class="tl-wrap b-info">
                         <span class="tl-date">5s ago</span>
