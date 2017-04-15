@@ -61,10 +61,10 @@ server.listen(3000, function() {
   console.log('listening on port 3000');
 });
 
-global.activeRooms = [];
+global.activeRooms = new Array();
+global.activeLinks = new Array();
 
 var chatroom = io.of('/chat');
-
 chatroom.on('connection', require('./routes/chatroom'));
 // chatroom.on('connection', function(socket) {
 //   console.log('someone connected');
