@@ -2,28 +2,28 @@
  * Created by philic on 2017/4/14.
  */
 
+var redis = require("redis");
+var client = redis.createClient();
+client.on("error", function (err) {
+    console.log("Error " + err);
+});
+
 
 module.exports = function (socket) {
-    console.log('someone connected');
-    // console.log(socket.nsp);
-    // console.log(this);
-    // console.log(this === socket.nsp);
     socket.emit('welcome', {});
     socket.emit('fresh', {rooms: global.activeRooms});
 
-
     socket.on('link', function(req) {
-        console.log(req);
+        console.log(socket.id);
+        client.set(req.userId, socket.id, redis.print);
+        client.expire(req.userId, 20*60);
+
         global.activeLinks.push({
-            userInfo: {
-                userId: req.userId,
-                username: req.username
-            },
-            io: socket
+            userId:     req.userId,
+            username:   req.username,
+            socketId:   socket.id
         });
-        console.log('show active links');
-        console.log(global.activeLinks);
-        console.log(global.activeLinks.length);
+
     });
 
     socket.on('drop', function(req) {
@@ -34,31 +34,37 @@ module.exports = function (socket) {
 
 
     socket.on('host', function(req) {
+
         var chatRoom = {
             title: req.username,
             host: {
                 userId: req.userId,
                 username: req.username,
-                socketId: req.socketId
+                socketId: '/chat#'+req.socketId
             },
             status: 0,
             index: global.activeRooms.length,
             guests: []
         };
-        console.log(chatRoom);
-        global.activeRooms.push(chatRoom);
-        console.log(global.activeLinks);
-        // global.activeLinks.map(function (item) {
-        //     console.log(item);
-        //     item.io.emit('fresh', {rooms: activeRooms});
-        // });
-        
-        for(var key in global.activeLinks) {
-            console.log(global.activeLinks[key]);
-            global.activeLinks[key].io.emit('fresh', {rooms: activeRooms});
-        }
 
-        console.log(global.activeLinks.length);
+        global.activeRooms.push(chatRoom);
+        global.activeLinks.map(function (item) {
+            if(socket.nsp.sockets[item.socketId]) {
+                socket.nsp.sockets[item.socketId].emit('fresh', {rooms: activeRooms});
+                socket.emit('init', {index: chatRoom.index});
+            }
+        });
+        
+        var temDate = new Date();
+        var temMsg = {
+            msg: '欢迎 ' + req.username + ' 加入房间',
+            userId: 0,
+            time: temDate.getHours()+':'+temDate.getMinutes(),
+            username: '系统消息'
+        };
+
+        socket.nsp.sockets[global.activeRooms[chatRoom.index].host.socketId].emit('say', temMsg);
+
     });
 
     socket.on('quit', function(req) {
@@ -70,14 +76,35 @@ module.exports = function (socket) {
     });
 
     socket.on('join', function(req) {
-        console.log(req);
-        // var initGuest = {
-        //     userId: req.userId,
-        //     username: req.username,
-        //     socketId: req.socketId,
-        //     io: socket.nsp
-        // };
-        // global.activeRooms[req.index].guests.push(initGuest);
+        var initGuest = {
+            userId: req.userId,
+            username: req.username,
+            socketId: '/chat#'+req.socketId
+        };
+
+        global.activeRooms[req.index].guests.push(initGuest);
+
+        var temDate = new Date();
+        var temMsg = {
+            msg: '欢迎 ' + req.username + ' 加入房间',
+            userId: 0,
+            time: temDate.getHours()+':'+temDate.getMinutes(),
+            username: '系统消息'
+        };
+        global.activeRooms[req.index].guests.map(function (guest) {
+            console.log(guest.socketId);
+            if(socket.nsp.sockets[guest.socketId]) {
+                socket.nsp.sockets[guest.socketId].emit('say', temMsg);
+            }
+        });
+        if(socket.nsp.sockets[global.activeRooms[req.index].host.socketId]) {
+            socket.nsp.sockets[global.activeRooms[req.index].host.socketId].emit('say', temMsg);
+        }
+        // global.activeRooms[req.index].host.io.emit('say', temMsg);
+        //global.activeRooms[req.userId].guests.push(initGuest);
+        //console.log(global.activeLinks);
+        //console.log(initGuest);
+
     });
 
     socket.on('say', function(req) {
@@ -86,8 +113,26 @@ module.exports = function (socket) {
         // global.activeRooms[req.index].guests.map(function (item) {
         //     item.io.emit('say', {msg: req.msg});
         // });
-        global.activeLinks.map(function (item){
-            item.io.emit('say', {msg: req.msg});
-        })
+        client.expire(req.userId, 20*60);
+        var temDate = new Date();
+        var temMsg = {
+            msg: req.msg,
+            userId: req.userId,
+            username: req.username,
+            time: temDate.getHours()+':'+temDate.getMinutes()
+        };
+
+        global.activeRooms.map(function(room) {
+            if(room.host.userId === req.roomId) {
+                room.guests.map(function (guest) {
+                    if(socket.nsp.sockets[guest.socketId]) {
+                        socket.nsp.sockets[guest.socketId].emit('say', temMsg);
+                    }
+                });
+                if(socket.nsp.sockets[room.host.socketId]) {
+                    socket.nsp.sockets[room.host.socketId].emit('say', temMsg);
+                }
+            }
+        });
     });
 };

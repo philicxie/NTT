@@ -71,6 +71,23 @@ router.post('/commitBill', function(req, res, next) {
                     status: 0
                 });
                 console.log(initOrder);
+                var transaction = require('./transaction');
+                transaction(db)
+                    .step(function(t, context, next) {
+                        t.collection('books').findAndModify({ _id: initOrder.books.id }, function(err, doc) {
+                            if (err) return next(err);
+                            if(doc[0].count>0) {
+                                doc[0].count = doc[0] - initOrder.books.count;
+                            }
+                        });
+
+                    })
+                    .step(function(t, context, next) {
+                        t.collection('orders').findAndModify({ _id: initOrder.key }, function(err, doc) {
+                            if (err) return next(err);
+                            doc[0].status = 1;
+                        });
+                    });
                 initOrder.save(function (err, doc) {
                     if(err) {
                         res.send({code: 303});

@@ -32,7 +32,7 @@
     <!-- .col -->
     <div class="col">
         <div class="wrapper">
-            <ul class="timeline" style="margin-bottom: 150px; margin-left: -280px;">
+            <ul class="timeline" ng-style="chatStyle">
                 <li class="tl-item" refresh-on="fresh" ng-repeat="msg in msgList">
                     <div class="tl-wrap b-{{msg.cate}}">
                         <span class="tl-date">{{msg.time}}</span>
