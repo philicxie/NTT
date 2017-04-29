@@ -44,3 +44,5 @@ module.exports.user = mongoose.model('Users', userSchema);
 module.exports.order = mongoose.model('Orders', orderSchema);
 
 module.exports.token = mongoose.model('Tokens', tokenSchema);
+
+module.exports.mongo = mongoose;

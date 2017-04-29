@@ -98,11 +98,12 @@ app.controller('ChatCtrl', ['$scope', '$http', '$localStorage', '$state',
         };
 
         $scope.sendMessage = function() {
-            console.log($scope.chosenRoom);
+            //console.log($scope.chosenRoom);
+            console.log($scope.user);
             if($scope.messageBuffer.length) {
                 $scope.socket.emit('say', {
                     roomId: $scope.chosenRoom.roomInfo.host.userId,
-                    userId: $scope.user.id,
+                    userId: $scope.user.userId,
                     username: $scope.user.name,
                     msg: $scope.messageBuffer
                 });

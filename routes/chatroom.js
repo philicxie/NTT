@@ -15,6 +15,7 @@ module.exports = function (socket) {
 
     socket.on('link', function(req) {
         console.log(socket.id);
+        console.log(req);
         client.set(req.userId, socket.id, redis.print);
         client.expire(req.userId, 20*60);
 
@@ -65,6 +66,15 @@ module.exports = function (socket) {
 
         socket.nsp.sockets[global.activeRooms[chatRoom.index].host.socketId].emit('say', temMsg);
 
+        client.keys("#", function(err, doc) {
+            doc.map(function(item) {
+                if(socket.nsp.sockets[item.socketId]) {
+                    socket.nsp.sockets[item.socketId].emit('fresh', {rooms: activeRooms});
+                    socket.emit('init', {index: chatRoom.index});
+                }
+            });
+        });
+
     });
 
     socket.on('quit', function(req) {
@@ -108,12 +118,13 @@ module.exports = function (socket) {
     });
 
     socket.on('say', function(req) {
-        console.log(req);
+        //console.log(req);
         // global.activeRooms[req.index].host.io.emit('say', {msg: req.msg});
         // global.activeRooms[req.index].guests.map(function (item) {
         //     item.io.emit('say', {msg: req.msg});
         // });
         client.expire(req.userId, 20*60);
+
         var temDate = new Date();
         var temMsg = {
             msg: req.msg,
